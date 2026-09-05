@@ -1,0 +1,127 @@
+{
+  "client/public/__manus__/debug-collector.js": {
+    "mtime": 312757200.0,
+    "ast_hash": "45b1e83bacf2dc3d3b20bb18b465abe0",
+    "semantic_hash": ""
+  },
+  "client/src/main.js": {
+    "mtime": 1788621076.9627607,
+    "ast_hash": "38ce95cd0071a7fad90c759663ee0d07",
+    "semantic_hash": ""
+  },
+  "client/index.html": {
+    "mtime": 1788619000.4759195,
+    "ast_hash": "8b1f4e160ce18c4a7dccd0d03b3912c8",
+    "semantic_hash": ""
+  },
+  "client/public/favicon.svg": {
+    "mtime": 1788620516.0397646,
+    "ast_hash": "6f9e9d45549dbbe12cbdc1275ccbe955",
+    "semantic_hash": ""
+  },
+  "client/public/images/footer-bg.jpg": {
+    "mtime": 1787771133.1785455,
+    "ast_hash": "f24ec73722c59c8aa58cafca5ffec35e",
+    "semantic_hash": ""
+  },
+  "client/public/images/gallery-moment-1.jpg": {
+    "mtime": 1787769970.4296455,
+    "ast_hash": "a46b6f28dd38ae9c51a64e071bf0aba8",
+    "semantic_hash": ""
+  },
+  "client/public/images/gallery-moment-2.jpg": {
+    "mtime": 1787769970.4296455,
+    "ast_hash": "94efb1f264a8e9ff96601eb47f326669",
+    "semantic_hash": ""
+  },
+  "client/public/images/gallery-moment-3.jpg": {
+    "mtime": 1787769970.4296455,
+    "ast_hash": "b978b0556dd0da4514d04adb2d189568",
+    "semantic_hash": ""
+  },
+  "client/public/images/hero-art.jpg": {
+    "mtime": 1787775770.7925744,
+    "ast_hash": "10e2d437f62245c04a28032775728b25",
+    "semantic_hash": ""
+  },
+  "client/public/images/hero-graduation-main.jpg": {
+    "mtime": 1787769970.4296455,
+    "ast_hash": "8e94ddd857c851cdad1266704dcfbfe1",
+    "semantic_hash": ""
+  },
+  "client/public/images/partners-bg.jpg": {
+    "mtime": 1787776664.480303,
+    "ast_hash": "b959efd0d27f2c49f5c5b9d5aa348b8e",
+    "semantic_hash": ""
+  },
+  "client/public/images/track-bazar.jpg": {
+    "mtime": 1787769970.4296455,
+    "ast_hash": "eda6b99c2ebcce29379f3ce91d27cd1d",
+    "semantic_hash": ""
+  },
+  "client/public/images/track-ceremony.jpg": {
+    "mtime": 1787769970.4296455,
+    "ast_hash": "6e03d05bc00b416cbb324e5a114bf74e",
+    "semantic_hash": ""
+  },
+  "client/public/images/track-media.jpg": {
+    "mtime": 1787769970.4296455,
+    "ast_hash": "4df41fde9a5662b371e3258720e7c5d9",
+    "semantic_hash": ""
+  },
+  "client/public/images/track-projects.jpg": {
+    "mtime": 1787769970.4296455,
+    "ast_hash": "3d360859baced8931b3fdf6abd3e245c",
+    "semantic_hash": ""
+  },
+  "client/public/images/track-volunteering.jpg": {
+    "mtime": 1787769970.4296455,
+    "ast_hash": "71bb5e8d88e8ce81a1362ba86a199daa",
+    "semantic_hash": ""
+  },
+  "client/public/images/vision-art.jpg": {
+    "mtime": 1787775770.4410715,
+    "ast_hash": "476da36e8e971b6373d9cbc3ca91a9fc",
+    "semantic_hash": ""
+  },
+  "client/public/images/sponsors/lxd-api.png": {
+    "mtime": 1788618217.1021006,
+    "ast_hash": "72e071112a4e868508eb99868c7a54a2",
+    "semantic_hash": ""
+  },
+  "client/public/images/sponsors/lxd-host.png": {
+    "mtime": 1788618216.2270894,
+    "ast_hash": "f6d5984bd74085505c79f924be0e1e33",
+    "semantic_hash": ""
+  },
+  "client/public/images/sponsors/lxd-kaaf.png": {
+    "mtime": 1788618208.8959942,
+    "ast_hash": "cfbe6f65c62091cff1bb0af642507a30",
+    "semantic_hash": ""
+  },
+  "client/public/images/sponsors/lxd-mesh.jpg": {
+    "mtime": 1788618210.4630146,
+    "ast_hash": "7c3bb9e27b0ab7434b02d1af4d6384c2",
+    "semantic_hash": ""
+  },
+  "client/public/logo.svg": {
+    "mtime": 1788620506.366379,
+    "ast_hash": "f8f30ae4c0de55216cabb3f7fa30c15b",
+    "semantic_hash": ""
+  },
+  "client/public/images/sponsors/altuff-dept.png": {
+    "mtime": 1788621061.5831993,
+    "ast_hash": "71a17b77641cbf081b90a1cc66958c89",
+    "semantic_hash": ""
+  },
+  "client/public/images/sponsors/altuff-logo.svg": {
+    "mtime": 1775639499.0,
+    "ast_hash": "f13860f8f1d963bbada76a7764f949d6",
+    "semantic_hash": ""
+  },
+  "client/public/images/sponsors/jemolabs-logo.png": {
+    "mtime": 1788621043.9365647,
+    "ast_hash": "410c0ff57ae2355cff29936193e6cc11",
+    "semantic_hash": ""
+  }
+}

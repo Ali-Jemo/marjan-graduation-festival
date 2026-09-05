@@ -1,0 +1,15 @@
+{
+  "0": "main.js",
+  "1": "debug-collector.js",
+  "2": "renderApp",
+  "3": "logUiEvent",
+  "4": "applyViewTemplate",
+  "5": "initHomeMotion",
+  "6": "initThemeToggle",
+  "7": "initGlobalMotion",
+  "8": "formatArg",
+  "9": "fireConfetti",
+  "10": ".open",
+  "11": "homeViewTemplate",
+  "12": "homeViewTemplate"
+}
