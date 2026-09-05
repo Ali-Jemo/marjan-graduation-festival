@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="mgfGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffedb8"/>
+      <stop offset="48%" stop-color="#e2a84b"/>
+      <stop offset="100%" stop-color="#a86a1c"/>
+    </linearGradient>
+  </defs>
+  <!-- Engineering hexagon -->
+  <polygon points="32,8 51,19 51,41 32,52 13,41 13,19" fill="#c17a34" fill-opacity="0.08" stroke="url(#mgfGold)" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Mortarboard -->
+  <polygon points="32,19 45,26 32,33 19,26" fill="url(#mgfGold)"/>
+  <!-- Circuit trace + node on the board -->
+  <line x1="19" y1="26" x2="29" y2="26" stroke="#171310" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="32" cy="26" r="2.1" fill="#171310"/>
+  <!-- Head base -->
+  <path d="M24 32v4.5c0 3.6 16 3.6 16 0V32" stroke="#f5efe2" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Tassel + node -->
+  <line x1="45" y1="26" x2="45" y2="37" stroke="url(#mgfGold)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="45" cy="39.2" r="2.4" fill="url(#mgfGold)"/>
+  <!-- Spark -->
+  <path d="M50 8.5l1.1 2.4 2.4 1.1-2.4 1.1-1.1 2.4-1.1-2.4-2.4-1.1 2.4-1.1z" fill="url(#mgfGold)"/>
+</svg>

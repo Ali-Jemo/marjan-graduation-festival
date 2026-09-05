@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="mgfGoldFav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffedb8"/>
+      <stop offset="48%" stop-color="#e2a84b"/>
+      <stop offset="100%" stop-color="#a86a1c"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="46" height="46" rx="12" fill="#171310"/>
+  <rect x="1.75" y="1.75" width="44.5" height="44.5" rx="11" stroke="url(#mgfGoldFav)" stroke-width="1.5" opacity="0.85"/>
+  <g transform="translate(4.5,5.5) scale(0.61)">
+    <polygon points="32,8 51,19 51,41 32,52 13,41 13,19" fill="none" stroke="url(#mgfGoldFav)" stroke-width="3" stroke-linejoin="round"/>
+    <polygon points="32,19 45,26 32,33 19,26" fill="url(#mgfGoldFav)"/>
+    <line x1="19" y1="26" x2="29" y2="26" stroke="#171310" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="32" cy="26" r="2.6" fill="#171310"/>
+    <path d="M24 32v4.5c0 3.6 16 3.6 16 0V32" stroke="#f5efe2" stroke-width="3" stroke-linecap="round"/>
+    <line x1="45" y1="26" x2="45" y2="37" stroke="url(#mgfGoldFav)" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="45" cy="39.2" r="3" fill="url(#mgfGoldFav)"/>
+  </g>
+</svg>
