@@ -126,7 +126,7 @@ const GALLERY_PHOTOS = [
     src: "./public/images/hero-graduation-main.jpg",
     title: "مسيرة التخرج الرسمية وتتويج الدفعة",
     tag: "مراسم التكريم",
-    desc: "أجواء التكريم الرسمي وتسليم الدروع التذكارية في مجمع الكليات الهندسية.",
+    desc: "أجواء التكريم الرسمي وتسليم الدروع التذكارية في كلية الطف الجامعة.",
     colSpan: 2,
     width: 1400,
     height: 933,
@@ -171,7 +171,7 @@ const FAQS = [
   },
   {
     q: "ما هي آلية المساهمة المالية وما الذي تغطيه؟",
-    a: "تبدأ المساهمة الأساسية من 10,000 دينار عراقي وتغطي تكاليف التنظيم، روب التخرج، ودرع التكريم التذكاري، مع إمكانية رفع المساهمة بمضاعفات 1,000 د.ع لدعم تجهيزات الفعالية.",
+    a: "تبدأ المساهمة الأساسية من 10,000 دينار عراقي وتشمل الشهادة الرسمية وبطاقة حضور العائلة المخصصة للمشارك. روب التخرج والدرع التذكاري ضمن الباقات الأعلى، مع إمكانية رفع المساهمة بمضاعفات 1,000 د.ع لدعم تجهيزات الفعالية.",
   },
   {
     q: "متى وكيف أستلم بطاقة الدخول والتكريم؟",
@@ -179,7 +179,7 @@ const FAQS = [
   },
   {
     q: "هل يمكن دعوة الأهل والأصدقاء للحفل؟",
-    a: "نعم بالتأكيد! القاعات ومسرح التكريم في مجمع الكليات الهندسية مجهزة بالكامل لاستقبال عائلات الطلبة ومشاركتهم بهجة التخرج والتقاط الصور التذكارية.",
+    a: "نعم بالتأكيد! القاعات ومسرح التكريم في كلية الطف الجامعة مجهزة بالكامل لاستقبال عائلات الطلبة ومشاركتهم بهجة التخرج والتقاط الصور التذكارية.",
   },
   {
     q: "هل يلزم رفع ملف داعم مع استمارة الطلب؟",
@@ -268,7 +268,6 @@ let currentView = "home"; // "home" | "apply" | "success"
 let currentTrack = "attendee";
 let currentContribution = 10000;
 let uploadedFile = null;
-let countdownTimer = null;
 let lastSubmittedResult = null;
 let isFaqChatOpen = false;
 
@@ -277,7 +276,7 @@ function getContributionTier(amount) {
   if (num >= 50000) return { label: "مساهمة راعية وشرفية", desc: "تقدير خاص وتكريم شرفي ضمن الرعاة والداعمين" };
   if (num >= 25000) return { label: "مساهمة متميزة", desc: "دعم فعال يسهم في تحسين وتطوير تجهيزات الفعالية" };
   if (num >= 15000) return { label: "مساهمة داعمة", desc: "مساهمة إضافية تسهم في تقديم تجربة احتفالية أرقى" };
-  return { label: "مساهمة الحضور الأساسية", desc: "تغطي تكاليف التسجيل ومستلزمات الحضور والتكريم" };
+  return { label: "مساهمة الحضور الأساسية", desc: "تشمل الشهادة الرسمية وبطاقة حضور العائلة للمشارك" };
 }
 
 function formatIQD(num) {
@@ -424,22 +423,16 @@ function galleryLightboxTemplate() {
 // ─── View Rendering ───
 function renderApp() {
   app.innerHTML = `
-    <!-- ─── Reading Progress & Confetti Overlays ─── -->
-    <div class="progress-bar-container" aria-hidden="true">
-      <div class="progress-bar-fill" id="progressBar"></div>
-    </div>
-    <canvas id="confettiCanvas" aria-hidden="true"></canvas>
-
-    <!-- ─── Site Navigation (NVIDIA-style) ─── -->
+    <!-- ─── Site Navigation ─── -->
     <header class="site-nav" id="site-nav">
       <div class="container">
         <div class="site-nav-inner">
           <div class="nav-brand" id="nav-brand-btn" role="button" tabindex="0" aria-label="العودة إلى الرئيسية">
-            <span class="nav-brand-tile">${ICONS.logo}</span>
             <span class="nav-brand-text"><strong>مهرجان التخرج 2026</strong><small>كلية الطف الجامعة</small></span>
           </div>
 
-          <nav class="nav-links" aria-label="التنقل الرئيسي">
+          <!-- Group A: section links up to the FAQ, floating on the right -->
+          <nav class="nav-group nav-group-primary" aria-label="أقسام الموقع">
             <button type="button" class="nav-link ${currentView === "home" ? "active" : ""}" data-nav="home" data-scroll="home">الرئيسية</button>
             <button type="button" class="nav-link ${currentView === "home" ? "active" : ""}" data-scroll="about">الفكرة والرؤية</button>
             <div class="nav-drop" id="nav-tracks-drop">
@@ -457,21 +450,15 @@ function renderApp() {
             <button type="button" class="nav-link ${currentView === "home" ? "active" : ""}" data-scroll="gallery">معرض الصور</button>
             <button type="button" class="nav-link ${currentView === "home" ? "active" : ""}" data-scroll="schedule">البرنامج</button>
             <button type="button" class="nav-link ${currentView === "home" ? "active" : ""}" data-scroll="sponsors">الرعاة</button>
+          </nav>
+
+          <!-- Group B: FAQ and the apply portal, floating on the left -->
+          <nav class="nav-group nav-group-secondary" aria-label="الدعم والتقديم">
             <button type="button" class="nav-link ${currentView === "home" ? "active" : ""}" data-scroll="faq">الأسئلة</button>
+            <button type="button" class="nav-link nav-link-apply ${currentView !== "home" ? "active" : ""}" id="tab-btn-apply">صفحة التقديم</button>
           </nav>
 
           <div class="nav-actions">
-            <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="تبديل المظهر" title="تبديل ليلي / نهاري"></button>
-            <div class="view-switcher-pill">
-              <button type="button" class="view-tab-btn ${currentView === "home" ? "active" : ""}" id="tab-btn-home">
-                ${ICONS.home}
-                <span>الاستعراض</span>
-              </button>
-              <button type="button" class="view-tab-btn ${currentView !== "home" ? "active" : ""}" id="tab-btn-apply">
-                ${ICONS.file}
-                <span>صفحة التقديم</span>
-              </button>
-            </div>
             <button type="button" class="nav-menu-btn" id="nav-menu-btn" aria-label="فتح القائمة" aria-expanded="false">${ICONS.menu}</button>
           </div>
         </div>
@@ -523,7 +510,7 @@ function renderApp() {
           <div class="footer-col footer-col-action">
             <h4 class="footer-heading">بادر بالمشاركة</h4>
             <p class="footer-action-desc">كن جزءاً من هذا الحدث الاستثنائي وسجل حضورك الآن قبل انتهاء فترة التسجيل.</p>
-            <a href="https://t.me/jemo_coBot" target="_blank" class="btn btn-primary" style="width: 100%; text-decoration: none;"><span>التسجيل عبر تيليجرام (@jemo_coBot)</span>${ICONS.arrowLeftSm}</a>
+            <a href="https://t.me/jemo_coBot" target="_blank" class="btn btn-primary" style="width: 100%; text-decoration: none;"><span>سجّل الآن عبر تيليجرام (@jemo_coBot)</span></a>
           </div>
         </div>
 
@@ -545,19 +532,15 @@ function renderApp() {
     ${galleryLightboxTemplate()}
   `;
   attachGlobalEvents();
-  initGlobalMotion();
   if (currentView === "home") {
     initCountdown();
     initInteractiveTracks();
-    initSchedule();
     initSponsorsMotion();
     initHomeMotion();
   } else if (currentView === "apply") {
     setupApplyForm();
-    initTiltCards();
   } else if (currentView === "success") {
     setupSuccessInteractions();
-    fireConfetti();
   }
 }
 
@@ -571,7 +554,7 @@ function homeViewTemplate() {
         <div class="hero-veil" aria-hidden="true"></div>
         <canvas class="canvas-stars" id="starCanvas" aria-hidden="true" style="z-index: 2; mix-blend-mode: multiply;"></canvas>
         <div class="container" style="position: relative; z-index: 3;">
-          <div class="hero-grid reveal-on-scroll">
+          <div class="hero-grid">
             <div>
               <div class="eyebrow">
                 <span class="badge-dot"></span>
@@ -590,7 +573,7 @@ function homeViewTemplate() {
                   <span class="event-detail-icon">${ICONS.calendar}</span>
                   <div class="event-detail-text">
                     <span class="event-detail-label">موعد الفعالية</span>
-                    <span class="event-detail-val">15 نوفمبر 2026</span>
+                    <span class="event-detail-val">نهاية نوفمبر أو بداية ديسمبر 2026</span>
                   </div>
                 </div>
 
@@ -600,7 +583,7 @@ function homeViewTemplate() {
                   <span class="event-detail-icon">${ICONS.mapPin}</span>
                   <div class="event-detail-text">
                     <span class="event-detail-label">موقع الاحتفال</span>
-                    <span class="event-detail-val">مجمع الكليات الهندسية — كربلاء</span>
+                    <span class="event-detail-val">كلية الطف الجامعة — كربلاء</span>
                   </div>
                 </div>
               </div>
@@ -623,7 +606,7 @@ function homeViewTemplate() {
                   </span>
                   <span class="cd-date">
                     ${ICONS.calendar}
-                    15 نوفمبر 2026
+                    نهاية نوفمبر أو بداية ديسمبر 2026
                   </span>
                 </div>
 
@@ -657,7 +640,7 @@ function homeViewTemplate() {
           </div>
 
           <!-- Key Metrics Strip -->
-          <div class="stats-strip reveal-on-scroll">
+          <div class="stats-strip">
             <div class="stat-cell">
               <span class="stat-number">+500</span>
               <span class="stat-desc">طالب وخريج ومشارك</span>
@@ -706,7 +689,7 @@ function homeViewTemplate() {
       </div>
 
       <!-- ─── Bento Grid: Vision & Core Values ─── -->
-      <section id="about" class="section-py overflow-hidden relative reveal-on-scroll has-bg-art" style="background-image: url('./public/images/vision-art.jpg'); background-size: cover; background-position: center;">
+      <section id="about" class="section-py overflow-hidden relative has-bg-art" style="background-image: url('./public/images/vision-art.jpg'); background-size: cover; background-position: center;">
         <!-- Subtle overlay to ensure text readability -->
         <div class="section-veil" aria-hidden="true"></div>
         <div class="container" style="position: relative; z-index: 10;">
@@ -813,7 +796,7 @@ function homeViewTemplate() {
       <!-- ─── Section: 5 Participation Tracks ─── -->
       <section id="tracks" class="section-py">
         <div class="container">
-          <div class="section-header flex-between reveal-on-scroll" style="flex-wrap: wrap; gap: 16px;">
+          <div class="section-header flex-between" style="flex-wrap: wrap; gap: 16px;">
             <div>
               <div class="eyebrow">المسارات الخمسة</div>
               <h2 class="section-title">اختر دورك في صنع المشهد</h2>
@@ -822,7 +805,7 @@ function homeViewTemplate() {
             <a href="https://t.me/jemo_coBot" target="_blank" class="btn btn-primary" style="text-decoration: none;"><span>سجل الآن عبر تيليجرام (@jemo_coBot)</span>${ICONS.arrowLeftSm}</a>
           </div>
 
-          <div class="tracks-interactive-container reveal-on-scroll">
+          <div class="tracks-interactive-container">
 
             <!-- Mobile Horizontal Track Selector Bar -->
             <div class="track-mobile-tabs-bar" id="track-mobile-tabs" aria-label="اختيار المسار"></div>
@@ -871,7 +854,7 @@ function homeViewTemplate() {
 
             <!-- Menu (Left side on desktop in RTL) -->
             <div id="track-menu" style="grid-column: 2; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1); width: 100%;">
-              <span id="track-menu-indicator" class="track-menu-indicator"></span>
+              <span id="" class=""></span>
             </div>
           </div>
 
@@ -901,7 +884,7 @@ function homeViewTemplate() {
       <!-- ─── Editorial Photo Showcase Gallery ─── -->
       <section id="gallery" class="section-py section-surface">
         <div class="container">
-          <div class="section-header text-center reveal-on-scroll">
+          <div class="section-header text-center">
             <div class="eyebrow">المعرض الفوتوغرافي</div>
             <h2 class="section-title">مشاهد وذكريات تليق بالحدث</h2>
             <p class="lead">لقطات تعكس بهجة التخرج، تميز مشاريع الدفعة، وأجواء الفخر الجامعي في كلية الطف الجامعة.</p>
@@ -909,7 +892,7 @@ function homeViewTemplate() {
 
           <div class="gallery-grid">
             ${GALLERY_PHOTOS.map((p, i) => `
-              <div class="gallery-cell gal-reveal" style="--d:${i * 80}ms">
+              <div class="gallery-cell" style="--d:${i * 80}ms">
                 <button type="button" class="gallery-card ${p.colSpan === 2 ? "gallery-col-2" : ""}" data-gallery-index="${i}" aria-label="تكبير الصورة: ${p.title}">
                   <span class="gallery-img-wrapper">
                     <img src="${p.src}" width="${p.width}" height="${p.height}" alt="${p.title}" class="gallery-img" loading="lazy" decoding="async" sizes="(max-width: 768px) 100vw, (max-width: 992px) 50vw, calc(100% - 32px)" style="max-width:100%; height:auto;" />
@@ -930,19 +913,19 @@ function homeViewTemplate() {
       <!-- ─── Interactive Schedule Timeline ─── -->
       <section id="schedule" class="section-py section-surface">
         <div class="container">
-          <div class="section-header text-center reveal-on-scroll">
+          <div class="section-header text-center">
             <div class="eyebrow">الجدول الزمني</div>
             <h2 class="section-title">برنامج اليوم الاحتفالي</h2>
             <p class="lead">فقرات مدروسة تضمن انسيابية الحركة وتكريم جميع الطلبة بأعلى المعايير التنظيمية.</p>
           </div>
 
-          <div class="schedule-filter-bar reveal-on-scroll">
+          <div class="schedule-filter-bar">
             <button type="button" class="filter-btn active" data-period="all">كافة الفقرات</button>
             <button type="button" class="filter-btn" data-period="morning">الفترة الصباحية</button>
             <button type="button" class="filter-btn" data-period="afternoon">الفترة المسائية</button>
           </div>
 
-          <div class="timeline-list reveal-on-scroll" id="schedule-timeline-container">
+          <div class="timeline-list" id="schedule-timeline-container">
             <div class="timeline-item" data-period="morning">
               <div class="timeline-time-badge">
                 ${ICONS.clock}
@@ -991,7 +974,7 @@ function homeViewTemplate() {
       </section>
 
       <!-- ─── Sponsors & Partners (Redesigned) ─── -->
-      <section id="sponsors" class="section-py sponsors-section reveal-on-scroll">
+      <section id="sponsors" class="section-py sponsors-section">
         <div class="container">
           <div class="section-header text-center">
             <div class="eyebrow">الرعاة والشركاء</div>
@@ -1000,7 +983,7 @@ function homeViewTemplate() {
           </div>
 
           <!-- Organizer feature card (Mistral customer-story style) -->
-          <div class="sponsor-organizer sponsor-feature sp-reveal" style="--d:0ms">
+          <div class="sponsor-organizer sponsor-feature" style="--d:0ms">
             <div class="sponsor-org-text">
               <span class="badge badge-accent">الجهة المنظمة</span>
               <h3>${SPONSORS[0].name}</h3>
@@ -1033,7 +1016,7 @@ function homeViewTemplate() {
           <!-- Partners grid (Mistral product-card style) -->
           <div class="sponsors-grid">
             ${SPONSORS.slice(1).map((s, i) => `
-              <div class="sponsor-card sp-reveal" style="--d:${(i + 1) * 90}ms">
+              <div class="sponsor-card" style="--d:${(i + 1) * 90}ms">
                 ${s.cover ? `<div class="sponsor-visual"><img src="${s.cover}" alt="" loading="lazy" decoding="async" /></div>` : ""}
                 <div class="sponsor-card-body">
                   <div class="sponsor-card-top">
@@ -1046,7 +1029,6 @@ function homeViewTemplate() {
                   ${s.chips ? `<div class="sponsor-chips">${s.chips.map(c => `<span class="sponsor-chip">${c}</span>`).join("")}</div>` : ""}
                   ${s.url ? `<a class="sponsor-card-link" href="${s.url}" target="_blank" rel="noopener"><span>زيارة الموقع</span>${ICONS.external}</a>` : ""}
                 </div>
-                <div class="sponsor-spot" aria-hidden="true"></div>
               </div>
             `).join("")}
           </div>
@@ -1073,7 +1055,7 @@ const BOT_FAQS = [
     q: "شكد سعر الاشتراك؟",
     category: "التكلفة والباقات",
     icon: ICONS.coins,
-    a: "المساهمة الأساسية لمسار الحضور والتكريم تبدأ من 10,000 د.ع وتغطي روب التخرج، الدرع التذكاري المخصص، وبطاقة الدخول الرسمية.",
+    a: "المساهمة الأساسية لمسار الحضور والتكريم تبدأ من 10,000 د.ع وتشمل الشهادة الرسمية وبطاقة حضور العائلة المخصصة للمشارك فقط.",
     actionText: "تفاصيل الباقات في البوت",
     actionParam: "pricing"
   },
@@ -1082,7 +1064,7 @@ const BOT_FAQS = [
     q: "شوكت موعد الحفلة؟",
     category: "الموعد والجدول",
     icon: ICONS.calendar,
-    a: "يقام مهرجان التخرج الطلابي الأول يوم 15 نوفمبر 2026، من الساعة 9:00 صباحاً حتى 4:00 مساءً.",
+    a: "يجري تحديد موعد مهرجان التخرج الطلابي الأول بالتنسيق مع العمادة، ويقع في نهاية شهر نوفمبر أو في بدايته من عام 2026.",
     actionText: "جدول المواعيد في البوت",
     actionParam: "schedule"
   },
@@ -1152,7 +1134,7 @@ function applyViewTemplate() {
             <div class="apply-meta-strip">
               <div class="apply-meta-item">
                 ${ICONS.calendar}
-                <span>موعد الحفل: <strong>15 نوفمبر 2026</strong></span>
+                <span>موعد الحفل: <strong>يُحدَّد مع العمادة — نهاية نوفمبر أو بداية ديسمبر 2026</strong></span>
               </div>
               <div class="apply-meta-item">
                 ${ICONS.mapPin}
@@ -1495,26 +1477,6 @@ function scrollToSection(sectionId) {
 }
 
 // ─── Global Event Listeners ───
-function getPreferredTheme() {
-  try {
-    const saved = localStorage.getItem("mgf-theme");
-    if (saved === "dark" || saved === "light") return saved;
-  } catch {}
-  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-function applyTheme(theme) {
-  document.documentElement.dataset.theme = theme;
-  try { localStorage.setItem("mgf-theme", theme); } catch {}
-  const btn = document.getElementById("theme-toggle-btn");
-  if (btn) btn.innerHTML = theme === "dark" ? ICONS.sun : ICONS.moon;
-}
-function initThemeToggle() {
-  applyTheme(getPreferredTheme());
-  document.getElementById("theme-toggle-btn")?.addEventListener("click", () => {
-    const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    applyTheme(next);
-  });
-}
 // ─── NVIDIA-style header: scroll shadow, mega dropdown, hamburger drawer ───
 function initNvHeader() {
   const header = document.getElementById("site-nav");
@@ -1591,13 +1553,11 @@ function selectTrackAndScroll(i) {
   }, 80);
 }
 function attachGlobalEvents() {
-  initThemeToggle();
   initNvHeader();
   // Brand Click
   document.getElementById("nav-brand-btn")?.addEventListener("click", () => switchView("home"));
 
-  // View switch tabs
-  document.getElementById("tab-btn-home")?.addEventListener("click", () => switchView("home"));
+  // Apply portal tab
   document.getElementById("tab-btn-apply")?.addEventListener("click", () => switchView("apply"));
 
   // Navigation button handlers
@@ -1852,53 +1812,27 @@ function setupFaqChatEvents() {
 }
 
 // ─── Countdown Timer ───
+// ponytail: exact date is still with the deanery, so this counts down to the
+// Exact day is still with the deanery, so the countdown renders the window
+// start (late Nov 2026) once and stays static.
 function initCountdown() {
-  clearInterval(countdownTimer);
-  const targetDate = new Date("2026-11-15T09:00:00+03:00").getTime();
+  const targetDate = new Date("2026-11-30T09:00:00+03:00").getTime();
+  const diff = targetDate - Date.now();
+  if (diff <= 0) return;
 
-  function update() {
-    const now = Date.now();
-    const diff = targetDate - now;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs = Math.floor((diff % (1000 * 60)) / 1000);
 
-    if (diff > 0) {
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-      const dEl = document.getElementById("cd-days");
-      const hEl = document.getElementById("cd-hours");
-      const mEl = document.getElementById("cd-mins");
-      const sEl = document.getElementById("cd-secs");
-      const sTile = sEl ? sEl.closest(".timer-tile") : null;
-
-      const setVal = (el, val, soft) => {
-        if (!el) return;
-        const txt = String(val).padStart(2, "0");
-        if (el.textContent !== txt) {
-          el.textContent = txt;
-          const cls = soft ? "tick-soft" : "tick";
-          el.classList.remove(cls);
-          void el.offsetWidth; // ponytail: restart animation
-          el.classList.add(cls);
-        }
-      };
-
-      setVal(dEl, days, true);
-      setVal(hEl, hours, true);
-      setVal(mEl, mins, true);
-      setVal(sEl, secs, false);
-
-      if (sTile) {
-        sTile.classList.remove("pulse");
-        void sTile.offsetWidth;
-        sTile.classList.add("pulse");
-      }
-    }
-  }
-
-  update();
-  countdownTimer = setInterval(update, 1000);
+  const set = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = String(val).padStart(2, "0");
+  };
+  set("cd-days", days);
+  set("cd-hours", hours);
+  set("cd-mins", mins);
+  set("cd-secs", secs);
 }
 
 // ─── Telegram Apply Portal Interactions ───
@@ -2029,7 +1963,6 @@ function initInteractiveTracks() {
   const desc = document.getElementById("track-interactive-desc");
   const tipEl = document.getElementById("track-interactive-tip");
   const btn = document.getElementById("track-interactive-btn");
-  const indicator = document.getElementById("track-menu-indicator");
   if (!container) return;
 
   const tracksData = Object.values(TRACKS);
@@ -2046,7 +1979,6 @@ function initInteractiveTracks() {
       b.type = "button";
       b.className = "track-interactive-item";
       b.textContent = t.title;
-      b.addEventListener("mouseenter", () => changeBot(i));
       b.addEventListener("click", () => changeBot(i));
       desktopBtns.push(b);
       menu.appendChild(b);
@@ -2073,50 +2005,26 @@ function initInteractiveTracks() {
     }
   });
 
-  function moveIndicator(b) {
-    if (!b || !indicator || window.innerWidth < 992) return;
-    indicator.style.width = b.offsetWidth + "px";
-    indicator.style.height = b.offsetHeight + "px";
-    indicator.style.transform = `translate(${b.offsetLeft}px, ${b.offsetTop}px)`;
-    indicator.style.opacity = "1";
-  }
-
-
   function changeBot(idx) {
     if (idx === currentIndex) return;
     currentIndex = idx;
     const data = tracksData[idx];
 
     desktopBtns.forEach((b, i) => b.classList.toggle("active", i === idx));
-    mobilePills.forEach((p, i) => {
-      p.classList.toggle("active", i === idx);
-      if (i === idx && mobileTabs) {
-        const offset = p.offsetLeft - (mobileTabs.clientWidth - p.clientWidth) / 2;
-        mobileTabs.scrollTo({ left: offset, behavior: "smooth" });
-      }
-    });
+    mobilePills.forEach((p, i) => p.classList.toggle("active", i === idx));
     dotElements.forEach((d, i) => d.classList.toggle("active", i === idx));
 
-    if (desktopBtns[idx]) moveIndicator(desktopBtns[idx]);
-
-    container.classList.remove("fade-in");
-    container.classList.add("fade-out");
-    setTimeout(() => {
-      if (img) { img.src = data.image; img.alt = `صورة توضيحية لـ${data.title}`; if (data.width) img.width = data.width; if (data.height) img.height = data.height; }
-      if (title) title.textContent = data.title;
-      if (subtitle) subtitle.textContent = data.subtitle;
-      if (numEl) numEl.textContent = `${data.number} / المسار ${data.number === "01" ? "الأول" : data.number === "02" ? "الثاني" : data.number === "03" ? "الثالث" : data.number === "04" ? "الرابع" : "الخامس"}`;
-      if (tagEl) tagEl.textContent = data.tag;
-      if (desc) desc.textContent = data.desc;
-      if (tipEl) tipEl.textContent = data.tip;
-      if (btn) btn.dataset.track = data.id;
-
-      container.classList.remove("fade-out");
-      container.classList.add("fade-in");
-    }, 120);
+    if (img) { img.src = data.image; img.alt = `صورة توضيحية لـ${data.title}`; if (data.width) img.width = data.width; if (data.height) img.height = data.height; }
+    if (title) title.textContent = data.title;
+    if (subtitle) subtitle.textContent = data.subtitle;
+    if (numEl) numEl.textContent = `${data.number} / المسار ${data.number === "01" ? "الأول" : data.number === "02" ? "الثاني" : data.number === "03" ? "الثالث" : data.number === "04" ? "الرابع" : "الخامس"}`;
+    if (tagEl) tagEl.textContent = data.tag;
+    if (desc) desc.textContent = data.desc;
+    if (tipEl) tipEl.textContent = data.tip;
+    if (btn) btn.dataset.track = data.id;
   }
 
-  // Wire Prev / Next Mobile Buttons
+  // Wire Prev / Next Buttons
   prevBtn?.addEventListener("click", () => {
     changeBot((currentIndex - 1 + tracksData.length) % tracksData.length);
   });
@@ -2124,163 +2032,13 @@ function initInteractiveTracks() {
     changeBot((currentIndex + 1) % tracksData.length);
   });
 
-  // Touch Swipe on Card
-  let touchStartX = 0;
-  let touchEndX = 0;
-  container.addEventListener("touchstart", (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-
-  container.addEventListener("touchend", (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchEndX - touchStartX;
-    if (Math.abs(diff) > 45) {
-      if (diff < 0) {
-        // Swiped left (in RTL -> next)
-        changeBot((currentIndex + 1) % tracksData.length);
-      } else {
-        // Swiped right (in RTL -> prev)
-        changeBot((currentIndex - 1 + tracksData.length) % tracksData.length);
-      }
-    }
-  }, { passive: true });
-
-  window.addEventListener("resize", () => {
-    if (currentIndex > -1 && desktopBtns[currentIndex]) {
-      moveIndicator(desktopBtns[currentIndex]);
-    }
-  });
-
-  // Set initial track once without auto-cycling
+  // Set initial track once, no auto-cycling
   changeBot(0);
 }
 
 
-// ─── Motion & Animation Systems (v11 port) ───
-let progressBarBound = false;
-let confettiCanvasEl = null;
-let confettiCtx = null;
-let confettiParticles = [];
-let confettiAnimationId = null;
-let revealObserver = null;
-let starRafId = null;
-
-function initGlobalMotion() {
-  initProgressBar();
-  initConfettiEngine();
-}
-
-function initProgressBar() {
-  if (progressBarBound) return;
-  progressBarBound = true;
-  window.addEventListener("scroll", () => {
-    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-    const bar = document.getElementById("progressBar");
-    if (bar) bar.style.width = scrolled + "%";
-  }, { passive: true });
-}
-
-function initConfettiEngine() {
-  if (confettiCanvasEl) return;
-  confettiCanvasEl = document.getElementById("confettiCanvas");
-  if (!confettiCanvasEl) return;
-  confettiCtx = confettiCanvasEl.getContext("2d");
-  const resize = () => {
-    confettiCanvasEl.width = window.innerWidth;
-    confettiCanvasEl.height = window.innerHeight;
-  };
-  resize();
-  window.addEventListener("resize", resize);
-}
-
-function fireConfetti() {
-  if (!confettiCtx || !confettiCanvasEl) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  const colors = ["#5b8fd6", "#7aa6e2", "#9fb3cc", "#16305c", "#ffffff", "#c2ccdb", "#3aa88a"];
-  confettiParticles = [];
-
-  for (let i = 0; i < 140; i++) {
-    confettiParticles.push({
-      x: window.innerWidth / 2,
-      y: window.innerHeight * 0.6,
-      vx: (Math.random() - 0.5) * 18,
-      vy: (Math.random() - 0.8) * 22,
-      size: Math.random() * 8 + 4,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      rotation: Math.random() * 360,
-      rotSpeed: (Math.random() - 0.5) * 10,
-      gravity: 0.45,
-      opacity: 1,
-    });
-  }
-
-  if (!confettiAnimationId) animateConfetti();
-}
-
-function animateConfetti() {
-  if (!confettiCtx || !confettiCanvasEl) return;
-  confettiCtx.clearRect(0, 0, confettiCanvasEl.width, confettiCanvasEl.height);
-
-  for (let i = 0; i < confettiParticles.length; i++) {
-    const p = confettiParticles[i];
-    p.x += p.vx;
-    p.y += p.vy;
-    p.vy += p.gravity;
-    p.rotation += p.rotSpeed;
-    p.opacity -= 0.008;
-
-    confettiCtx.save();
-    confettiCtx.globalAlpha = Math.max(p.opacity, 0);
-    confettiCtx.translate(p.x, p.y);
-    confettiCtx.rotate((p.rotation * Math.PI) / 180);
-    confettiCtx.fillStyle = p.color;
-    confettiCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
-    confettiCtx.restore();
-  }
-
-  confettiParticles = confettiParticles.filter((p) => p.opacity > 0 && p.y < window.innerHeight);
-
-  if (confettiParticles.length > 0) {
-    confettiAnimationId = requestAnimationFrame(animateConfetti);
-  } else {
-    confettiCtx.clearRect(0, 0, confettiCanvasEl.width, confettiCanvasEl.height);
-    confettiAnimationId = null;
-  }
-}
-
 function initHomeMotion() {
   initGalleryLightbox();
-  initGalleryStagger();
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    document.querySelectorAll(".reveal-on-scroll").forEach((el) => el.classList.add("visible"));
-    return;
-  }
-  initStarCanvas();
-  initScrollReveal();
-  initTiltCards();
-}
-
-// ─── Gallery: per-card reveal stagger ───
-let galRevealObserver = null;
-function initGalleryStagger() {
-  const cells = document.querySelectorAll(".gal-reveal");
-  if (!cells.length) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    cells.forEach((el) => el.classList.add("gal-in"));
-    return;
-  }
-  if (galRevealObserver) galRevealObserver.disconnect();
-  galRevealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("gal-in");
-      galRevealObserver.unobserve(entry.target);
-    });
-  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-  cells.forEach((el) => galRevealObserver.observe(el));
 }
 
 // ─── Gallery lightbox: open, arrows, Esc, focus trap ───
@@ -2373,189 +2131,13 @@ function initGalleryLightbox() {
   });
 }
 
-function initStarCanvas() {
-  const starCanvas = document.getElementById("starCanvas");
-  if (!starCanvas) return;
-
-  if (starRafId) {
-    cancelAnimationFrame(starRafId);
-    starRafId = null;
-  }
-
-  const ctx = starCanvas.getContext("2d");
-  let stars = [];
-
-  function resizeStarCanvas() {
-    const parent = starCanvas.parentElement;
-    starCanvas.width = parent ? parent.offsetWidth : window.innerWidth;
-    starCanvas.height = parent ? parent.offsetHeight : 600;
-    initStars();
-  }
-
-  function initStars() {
-    stars = [];
-    const count = Math.floor(starCanvas.width / 36);
-    for (let i = 0; i < count; i++) {
-      stars.push({
-        x: Math.random() * starCanvas.width,
-        y: Math.random() * starCanvas.height,
-        size: Math.random() * 1.6 + 0.4,
-        alpha: Math.random() * 0.7 + 0.3,
-        speed: Math.random() * 0.3 + 0.1,
-      });
-    }
-  }
-
-  function drawStars() {
-    ctx.clearRect(0, 0, starCanvas.width, starCanvas.height);
-    const dark = document.documentElement.dataset.theme === "dark";
-    ctx.fillStyle = dark ? "#9fb3cc" : "#c17a34";
-    stars.forEach((s) => {
-      ctx.globalAlpha = s.alpha;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-      ctx.fill();
-      s.y -= s.speed;
-      if (s.y < 0) s.y = starCanvas.height;
-    });
-    starRafId = requestAnimationFrame(drawStars);
-  }
-
-  window.addEventListener("resize", resizeStarCanvas);
-  resizeStarCanvas();
-  drawStars();
-}
-
-function initScrollReveal() {
-  if (revealObserver) revealObserver.disconnect();
-  revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add("visible");
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll(".reveal-on-scroll").forEach((el) => revealObserver.observe(el));
-}
-
-function initTiltCards() {
-  document.querySelectorAll(".tilt-card").forEach((card) => {
-    function handleTilt(e) {
-      const rect = card.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      const x = clientX - rect.left;
-      const y = clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -10;
-      const rotateY = ((x - centerX) / centerX) * 10;
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-    }
-    function resetTilt() {
-      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
-    }
-    card.addEventListener("mousemove", handleTilt);
-    card.addEventListener("mouseleave", resetTilt);
-    card.addEventListener("touchmove", handleTilt, { passive: true });
-    card.addEventListener("touchend", resetTilt);
-  });
-}
-
-// ─── Schedule Timeline Reveal ───
-function initSchedule() {
-  const list = document.getElementById("schedule-timeline-container");
-  if (!list) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  list.classList.add("reveal-ready");
-  const items = Array.from(list.querySelectorAll(".timeline-item"));
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const i = items.indexOf(entry.target);
-        // ponytail: stagger via transition-delay; cheap for a tiny list
-        entry.target.style.transitionDelay = `${i * 90}ms`;
-        entry.target.classList.add("is-visible");
-        setTimeout(() => { entry.target.style.transitionDelay = ""; }, i * 90 + 500);
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-
-  items.forEach(it => io.observe(it));
 
 
-  // Re-pop visible items when a filter tab changes
-  document.querySelectorAll(".filter-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      let i = 0;
-      list.querySelectorAll(".timeline-item").forEach(it => {
-        if (it.style.display !== "none") {
-          it.classList.remove("refilter");
-          void it.offsetWidth; // ponytail: restart animation
-          it.style.animationDelay = `${i * 70}ms`;
-          it.classList.add("refilter");
-          i++;
-        }
-      });
-    });
-  });
-
-  // Clean up refilter so later hovers aren't blocked by the animation
-  list.addEventListener("animationend", (e) => {
-    if (e.target.classList?.contains("refilter")) e.target.classList.remove("refilter");
-  });
-}
-
-// ─── Sponsors Motion: Mistral-style stagger + spotlight + count-up ───
-let sponsorsObserver = null;
+// ─── Sponsors: static counts, no animation ───
 function initSponsorsMotion() {
   const section = document.getElementById("sponsors");
   if (!section) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    section.querySelectorAll(".sp-reveal").forEach((el) => el.classList.add("sp-in"));
-    section.querySelectorAll("[data-count]").forEach((el) => { el.textContent = el.dataset.count; });
-    return;
-  }
-
-  // Stagger reveal
-  if (sponsorsObserver) sponsorsObserver.disconnect();
-  sponsorsObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("sp-in");
-        if (entry.target.classList.contains("sponsor-feature")) runSponsorCountUp(section);
-        sponsorsObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  section.querySelectorAll(".sp-reveal").forEach((el) => sponsorsObserver.observe(el));
-
-  // Cursor spotlight on cards (Mistral product-card hover glow)
-  section.querySelectorAll(".sponsor-card").forEach((card) => {
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-      card.style.setProperty("--my", `${e.clientY - rect.top}px`);
-    });
-  });
-}
-
-function runSponsorCountUp(scope) {
-  scope.querySelectorAll("[data-count]").forEach((el) => {
-    if (el.dataset.done) return;
-    el.dataset.done = "1";
-    const target = Number(el.dataset.count) || 0;
-    const dur = 1200;
-    const t0 = performance.now();
-    function frame(t) {
-      const p = Math.min((t - t0) / dur, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased);
-      if (p < 1) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  });
+  section.querySelectorAll("[data-count]").forEach((el) => { el.textContent = el.dataset.count; });
 }
 
 renderApp();
