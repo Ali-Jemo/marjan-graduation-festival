@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>التزامات حفل التخرج</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root{ --navy:#141C2B; --navy-soft:#2A3854; --gold:#B98B3C; --gold-soft:#E7D3A6; --ink:#1D2430; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; width:794px; background:#fff; }
+  body{
+    font-family:"Noto Sans Arabic","Noto Sans Arabic UI",sans-serif;
+    color:var(--ink); font-size:13px; line-height:1.8;
+    text-align:right !important; letter-spacing:normal !important; word-spacing:normal !important;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .sheet{
+    position:relative; width:794px; height:1123px;
+    padding:26px 44px 20px; overflow:hidden; background:#fff; page-break-after:always;
+  }
+  .sheet:last-child{ page-break-after:auto; }
+  .frame{ position:absolute; inset:12px; border:2px solid var(--gold); }
+  .frame::before{ content:""; position:absolute; inset:5px; border:.9px solid var(--gold-soft); }
+  .cnr{ position:absolute; width:28px; height:28px; border:2.2px solid var(--gold); }
+  .tl{ top:12px; right:12px; border-left:0; border-bottom:0; }
+  .tr{ top:12px; left:12px; border-right:0; border-bottom:0; }
+  .bl{ bottom:12px; right:12px; border-left:0; border-top:0; }
+  .br{ bottom:12px; left:12px; border-right:0; border-top:0; }
+  .wm{ position:absolute; top:430px; left:50%; transform:translateX(-50%); width:500px; opacity:.045; }
+  .wm svg{ width:100%; height:auto; display:block; }
+  header{ position:relative; z-index:2; margin-bottom:10px; }
+  .brandbar{
+    position:relative; display:flex; align-items:center; gap:16px;
+    padding:14px 18px 13px 18px;
+    background:linear-gradient(160deg,#1E2A41 0%,#141C2B 55%,#0E1521 100%);
+    border-top:3px solid var(--gold); border-bottom:1px solid rgba(185,139,60,.55);
+    box-shadow:0 3px 12px rgba(20,28,43,.18);
+  }
+  .brandbar::after{
+    content:""; position:absolute; left:0; right:0; bottom:5px; height:1px;
+    background:linear-gradient(90deg,transparent,rgba(185,139,60,.6),transparent);
+  }
+  .logo{ flex:0 0 auto; width:58px; }
+  .logo svg{ width:100%; height:auto; display:block; }
+  .brandbar h1{
+    margin:0; font-family:"Noto Kufi Arabic","Noto Sans Arabic",sans-serif;
+    font-size:23px; font-weight:700; line-height:1.35; color:#F7EFDC;
+  }
+  .brandbar .sub{ margin:3px 0 0; font-size:14px; font-weight:500; color:#E7D3A6; }
+  .pg{
+    flex:0 0 auto; align-self:center; margin-right:auto; padding:3px 9px;
+    border:1px solid rgba(231,211,166,.5); color:#E7D3A6;
+    font-family:"Noto Kufi Arabic",sans-serif; font-size:9.6px;
+  }
+  .stamp{ position:absolute; top:0; bottom:0; right:0; width:5px;
+          background:linear-gradient(180deg,#E7D3A6,#B98B3C,#8E6524); }
+  .intro{
+    position:relative; z-index:2; margin:0 0 12px; padding:10px 13px;
+    background:#F7F3EA; border-right:4px solid var(--navy-soft);
+    font-size:13px; color:#39435A; line-height:1.8;
+  }
+  .intro b{ color:var(--navy); }
+  .intro.gold{ background:#FBF7EE; border-right-color:var(--gold); }
+  section{ position:relative; z-index:2; margin-bottom:12px; }
+  h2{
+    display:flex; align-items:center; gap:7px; margin:0 0 6px;
+    font-family:"Noto Kufi Arabic","Noto Sans Arabic",sans-serif;
+    font-size:14.2px; font-weight:700; color:var(--navy); line-height:1.5;
+  }
+  h2::before{ content:""; flex:0 0 auto; width:7px; height:7px;
+              background:var(--gold); transform:rotate(45deg); }
+  h2::after{ content:""; flex:1 1 auto; height:1px;
+              background:repeating-linear-gradient(90deg,var(--gold-soft) 0 6px,transparent 6px 11px); }
+  .rules{ display:flex; flex-direction:column; gap:6px; }
+  .rule{
+    display:flex; align-items:flex-start; gap:9px; padding:7px 11px; background:#fff;
+    border:1px solid #E4DCC9; border-right:3px solid var(--gold);
+  }
+  .rule.dark{ background:#F7F8FB; border-color:#DCE2EE; border-right-color:var(--navy-soft); }
+  .num{
+    flex:0 0 auto; width:21px; height:21px; margin-top:3px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Noto Kufi Arabic",sans-serif; font-size:11.5px; font-weight:700;
+    color:#fff; background:var(--navy); direction:ltr; unicode-bidi:isolate;
+  }
+  .rule.dark .num{ background:var(--navy-soft); }
+  .txt{ flex:1 1 auto; margin:0; font-size:13px; line-height:1.75; }
+  .txt b{ color:var(--navy); font-weight:700; }
+  .close{
+    position:relative; z-index:2; margin:2px 0 12px; padding:10px 13px;
+    background:#FBF7EE; border-right:4px solid var(--gold);
+    font-size:13px; line-height:1.8; color:#39435A;
+  }
+  .close b{ color:var(--navy); }
+  footer{ position:relative; z-index:2; }
+  .sig{ display:flex; gap:14px; padding-top:8px; border-top:1.2px solid var(--gold-soft); }
+  .sig .col{ flex:1 1 0; }
+  .sig .lab{ font-family:"Noto Kufi Arabic",sans-serif; font-size:11.4px;
+             font-weight:700; color:var(--navy); margin-bottom:2px; }
+  .sig .val{ font-size:11.4px; color:#5A6377; line-height:1.7; }
+  .rule-thin{ margin-top:8px; height:1px;
+              background:linear-gradient(90deg,transparent,var(--gold-soft) 15%,var(--gold-soft) 85%,transparent); }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="frame"></div>
+  <span class="cnr tl"></span><span class="cnr tr"></span>
+  <span class="cnr bl"></span><span class="cnr br"></span>
+  <div class="wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="mgfGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffedb8"/>
+      <stop offset="48%" stop-color="#e2a84b"/>
+      <stop offset="100%" stop-color="#a86a1c"/>
+    </linearGradient>
+  </defs>
+  <!-- Engineering hexagon -->
+  <polygon points="32,8 51,19 51,41 32,52 13,41 13,19" fill="#c17a34" fill-opacity="0.08" stroke="url(#mgfGold)" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Mortarboard -->
+  <polygon points="32,19 45,26 32,33 19,26" fill="url(#mgfGold)"/>
+  <!-- Circuit trace + node on the board -->
+  <line x1="19" y1="26" x2="29" y2="26" stroke="#171310" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="32" cy="26" r="2.1" fill="#171310"/>
+  <!-- Head base -->
+  <path d="M24 32v4.5c0 3.6 16 3.6 16 0V32" stroke="#f5efe2" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Tassel + node -->
+  <line x1="45" y1="26" x2="45" y2="37" stroke="url(#mgfGold)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="45" cy="39.2" r="2.4" fill="url(#mgfGold)"/>
+  <!-- Spark -->
+  <path d="M50 8.5l1.1 2.4 2.4 1.1-2.4 1.1-1.1 2.4-1.1-2.4-2.4-1.1 2.4-1.1z" fill="url(#mgfGold)"/>
+</svg>
+</div>
+  <header>
+    <div class="brandbar">
+      <span class="stamp"></span>
+      <div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="mgfGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffedb8"/>
+      <stop offset="48%" stop-color="#e2a84b"/>
+      <stop offset="100%" stop-color="#a86a1c"/>
+    </linearGradient>
+  </defs>
+  <!-- Engineering hexagon -->
+  <polygon points="32,8 51,19 51,41 32,52 13,41 13,19" fill="#c17a34" fill-opacity="0.08" stroke="url(#mgfGold)" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Mortarboard -->
+  <polygon points="32,19 45,26 32,33 19,26" fill="url(#mgfGold)"/>
+  <!-- Circuit trace + node on the board -->
+  <line x1="19" y1="26" x2="29" y2="26" stroke="#171310" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="32" cy="26" r="2.1" fill="#171310"/>
+  <!-- Head base -->
+  <path d="M24 32v4.5c0 3.6 16 3.6 16 0V32" stroke="#f5efe2" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Tassel + node -->
+  <line x1="45" y1="26" x2="45" y2="37" stroke="url(#mgfGold)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="45" cy="39.2" r="2.4" fill="url(#mgfGold)"/>
+  <!-- Spark -->
+  <path d="M50 8.5l1.1 2.4 2.4 1.1-2.4 1.1-1.1 2.4-1.1-2.4-2.4-1.1 2.4-1.1z" fill="url(#mgfGold)"/>
+</svg>
+</div>
+      <div>
+        <h1>مهرجان التخرج الطلابي الأول</h1>
+        <p class="sub">أحكام العمادة الواجب الالتزام بها</p>
+      </div>
+      <span class="pg">الصفحة الأولى</span>
+    </div>
+  </header>
+  <p class="intro">تلزم أحكام هذه الصفحة جميع أطراف الفعالية، وتُعدّ الأساس الذي تُبنى عليه بقية الضوابط قبل يوم الحفل وبعده.</p>
+  <section>
+    <h2>أولاً: أحكام القاعة والتجهيز</h2>
+    <div class="rules">
+      <div class="rule dark"><span class="num">1</span><p class="txt"><b>صيانة القاعة وتأهيلها:</b> تُجرى صيانة القاعة وتهيئة الكهرباء والإنارة والتبريد والنظافة قبل يوم الفعالية.</p></div>
+      <div class="rule dark"><span class="num">2</span><p class="txt"><b>الأثاث والسعة:</b> تُهيّأ القاعة بالكراسي المتاحة، ويُحدَّد عدد المقاعد بوضوح قبل فتح الأبواب.</p></div>
+      <div class="rule dark"><span class="num">3</span><p class="txt"><b>الصوت والميكروفونات:</b> يُجهَّز نظام الصوت وتُضبط الميكروفونات وتُجرَّب قبل بدء المراسم.</p></div>
+      <div class="rule dark"><span class="num">4</span><p class="txt"><b>الأبواب ومخارج الطوارئ:</b> تُفتح الأبواب الأساسية، وتُغلق المداخل الثانوية بوضوح، وتُبرز مخارج الطوارئ.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>ثانياً: أحكام الكادر</h2>
+    <div class="rules">
+      <div class="rule dark"><span class="num">5</span><p class="txt"><b>توفير الكادر:</b> تُهيَّأ الكوادر الفنية والإدارية اللازمة من قسم تقنيات الحاسوب وغرفة البدلات.</p></div>
+      <div class="rule dark"><span class="num">6</span><p class="txt"><b>الأمن والضيافة:</b> يُنسَّق مع إدارتي الأمن والضيافة، ويُشكَّل كادر فني مسؤول عن المداخل والمخارج.</p></div>
+      <div class="rule dark"><span class="num">7</span><p class="txt"><b>نقطة الإسعاف:</b> يُوفَّر موقع للإسعافات في مكان الفعالية طوال مدة انعقادها.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>ثالثاً: أحكام الدخول والحضور</h2>
+    <div class="rules">
+      <div class="rule dark"><span class="num">8</span><p class="txt"><b>حصر الحضور:</b> يُحصر عدد المقاعد والمنظمين، وتُجهَّز قوائم الحضور بحسب الحاجة.</p></div>
+      <div class="rule dark"><span class="num">9</span><p class="txt"><b>الإذن بالدخول:</b> يُسمح للطلاب بإدخال عوائلهم ومرافقيهم، وفقاً لما تسمح به سعة القاعة وعدد الأماكن.</p></div>
+      <div class="rule dark"><span class="num">10</span><p class="txt"><b>التغطية الإعلامية:</b> تُغطّى الفعالية مادياً وفوتوغرافياً، مع تخصيص منصة للحديث أمام الحضور.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>رابعاً: أحكام الموافقات والإعلانات</h2>
+    <div class="rules">
+      <div class="rule dark"><span class="num">11</span><p class="txt"><b>إذن الإعلانات:</b> لا يُنشر أي بوستر أو مادة تسويقية للحفل إلا بموافقة رسمية من العمادة.</p></div>
+      <div class="rule dark"><span class="num">12</span><p class="txt"><b>اعتماد اللجنة:</b> تعتمد العمادة اللجنة الطلابية المنفِّذة، وتمنحها الصلاحيات اللازمة لتنفيذ هذه الأحكام.</p></div>
+    </div>
+  </section>
+  <div class="close">تلزم أحكام هذه الصفحة جميع الأطراف، ويترتب عليها في الصفحة الثانية ما يلتزم به الطالب.</div>
+  <footer>
+    <div class="sig">
+      <div class="col">
+        <div class="lab">الجهة المقدمة:</div>
+        <div class="val">عمادة الكلية</div>
+      </div>
+      <div class="col">
+        <div class="lab">الجهة المعتمدة:</div>
+        <div class="val">قسم هندسة تقنيات الحاسوب</div>
+      </div>
+      <div class="col">
+        <div class="lab">التاريخ:</div>
+        <div class="val">__________ / __________ / 2026</div>
+      </div>
+    </div>
+    <div class="rule-thin"></div>
+  </footer>
+</div>
+<div class="sheet">
+  <div class="frame"></div>
+  <span class="cnr tl"></span><span class="cnr tr"></span>
+  <span class="cnr bl"></span><span class="cnr br"></span>
+  <div class="wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="mgfGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffedb8"/>
+      <stop offset="48%" stop-color="#e2a84b"/>
+      <stop offset="100%" stop-color="#a86a1c"/>
+    </linearGradient>
+  </defs>
+  <!-- Engineering hexagon -->
+  <polygon points="32,8 51,19 51,41 32,52 13,41 13,19" fill="#c17a34" fill-opacity="0.08" stroke="url(#mgfGold)" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Mortarboard -->
+  <polygon points="32,19 45,26 32,33 19,26" fill="url(#mgfGold)"/>
+  <!-- Circuit trace + node on the board -->
+  <line x1="19" y1="26" x2="29" y2="26" stroke="#171310" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="32" cy="26" r="2.1" fill="#171310"/>
+  <!-- Head base -->
+  <path d="M24 32v4.5c0 3.6 16 3.6 16 0V32" stroke="#f5efe2" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Tassel + node -->
+  <line x1="45" y1="26" x2="45" y2="37" stroke="url(#mgfGold)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="45" cy="39.2" r="2.4" fill="url(#mgfGold)"/>
+  <!-- Spark -->
+  <path d="M50 8.5l1.1 2.4 2.4 1.1-2.4 1.1-1.1 2.4-1.1-2.4-2.4-1.1 2.4-1.1z" fill="url(#mgfGold)"/>
+</svg>
+</div>
+  <header>
+    <div class="brandbar">
+      <span class="stamp"></span>
+      <div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="mgfGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffedb8"/>
+      <stop offset="48%" stop-color="#e2a84b"/>
+      <stop offset="100%" stop-color="#a86a1c"/>
+    </linearGradient>
+  </defs>
+  <!-- Engineering hexagon -->
+  <polygon points="32,8 51,19 51,41 32,52 13,41 13,19" fill="#c17a34" fill-opacity="0.08" stroke="url(#mgfGold)" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Mortarboard -->
+  <polygon points="32,19 45,26 32,33 19,26" fill="url(#mgfGold)"/>
+  <!-- Circuit trace + node on the board -->
+  <line x1="19" y1="26" x2="29" y2="26" stroke="#171310" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="32" cy="26" r="2.1" fill="#171310"/>
+  <!-- Head base -->
+  <path d="M24 32v4.5c0 3.6 16 3.6 16 0V32" stroke="#f5efe2" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Tassel + node -->
+  <line x1="45" y1="26" x2="45" y2="37" stroke="url(#mgfGold)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="45" cy="39.2" r="2.4" fill="url(#mgfGold)"/>
+  <!-- Spark -->
+  <path d="M50 8.5l1.1 2.4 2.4 1.1-2.4 1.1-1.1 2.4-1.1-2.4-2.4-1.1 2.4-1.1z" fill="url(#mgfGold)"/>
+</svg>
+</div>
+      <div>
+        <h1>مهرجان التخرج الطلابي الأول</h1>
+        <p class="sub">قوانين والتزامات الطلاب</p>
+      </div>
+      <span class="pg">الصفحة الثانية</span>
+    </div>
+  </header>
+  <p class="intro">تلزم هذه القوانين الطلاب المتقدّمين بطلبات المشاركة ومن يتعاون معهم في التنظيم، وتُستثنى من ذلك من لم يتقدّم بطلب.</p>
+  <section>
+    <h2>أولاً: قوانين الموقع</h2>
+    <div class="rules">
+      <div class="rule"><span class="num">1</span><p class="txt"><b>مرائب السيارات:</b> يُمنع الدخول إلى مرائب السيارة، وتُغلق بالكامل طوال فترة التحضير والفعالية.</p></div>
+      <div class="rule"><span class="num">2</span><p class="txt"><b>نظافة الموقع:</b> يُمنع رمي المخلفات خارج السلال المخصصة، وتُحافظ الحديقة على نظافتها في كل الأحوال.</p></div>
+      <div class="rule"><span class="num">3</span><p class="txt"><b>مرافقة العوائل:</b> يُبلَّغ اللجنة بعدد المرافقين مسبقاً، والالتزام بالحد الذي تسمح به سعة الجامعة.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>ثانياً: قوانين الدخول والحضور</h2>
+    <div class="rules">
+      <div class="rule"><span class="num">4</span><p class="txt"><b>الحضور في الموعد:</b> الالتزام بالحضور في الوقت المحدد دون استقبال مبكر، والانتظام في مقاعد التحديد.</p></div>
+      <div class="rule"><span class="num">5</span><p class="txt"><b>الآداب والسلوك:</b> احترام قاعة الاحتفال والمحافظة على الطقس العام داخل الحرم الجامعي.</p></div>
+      <div class="rule"><span class="num">6</span><p class="txt"><b>تسليم القاعة:</b> تسليم المكان في الموعد المحدد، نظيفاً ومرتباً كما كان بعد انتهاء الفعالية.</p></div>
+      <div class="rule"><span class="num">7</span><p class="txt"><b>عدم التدخّل:</b> عدم تسلّم أي مهمة أو تصرف نيابة عن اللجنة دون تكليف رسمي.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>ثالثاً: قوانين التنظيم والإعلام</h2>
+    <div class="rules">
+      <div class="rule"><span class="num">8</span><p class="txt"><b>آلية التسجيل:</b> وضوح آلية التسجيل لدى اللجنة، والالتزام بتعبئة الطلب المقدم دون تكرار الطلب.</p></div>
+      <div class="rule"><span class="num">9</span><p class="txt"><b>قصر المسؤولية:</b> قصر أي مسؤولية في تنظيم الحفل على الطلاب المتقدّمين بطلبات المشاركة.</p></div>
+      <div class="rule"><span class="num">10</span><p class="txt"><b>الانضباط في التجهيز:</b> الالتزام بالبرنامج الزمني المعتمد، والوصول قبل بدء التحضير في الموعد المحدد.</p></div>
+      <div class="rule"><span class="num">11</span><p class="txt"><b>مشاركة جميع الأقسام:</b> مشاركة جميع الطلاب من الأقسام العلمية جميعها بحسب الطاقة والقدرات.</p></div>
+      <div class="rule"><span class="num">12</span><p class="txt"><b>حماية الممتلكات:</b> المحافظة على قاعة الاحتفال وممتلكات الجامعة، وعدم الكتابة أو التعليق على الجدران.</p></div>
+    </div>
+  </section>
+  <div class="close">تُمنح موافقة مسبقة من قبل العمادة، وتُدرَج هذه النسخة مع الآراء والملاحظات في كشف رقم (...) بنسبة (...)% وتبقى جميع الصلاحيات لدى اللجنة الطلابية.</div>
+  <footer>
+    <div class="sig">
+      <div class="col">
+        <div class="lab">إعداد وتقديم:</div>
+        <div class="val">اللجنة الطلابية</div>
+      </div>
+      <div class="col">
+        <div class="lab">الجهة المقدمة:</div>
+        <div class="val">عمادة الكلية</div>
+      </div>
+      <div class="col">
+        <div class="lab">التاريخ:</div>
+        <div class="val">__________ / __________ / 2026</div>
+      </div>
+    </div>
+    <div class="rule-thin"></div>
+  </footer>
+</div>
+</body>
+</html>

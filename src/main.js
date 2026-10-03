@@ -34,6 +34,7 @@ const ICONS = {
   close: `<svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`,
   menu: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg>`,
   chev: `<svg class="icon-svg-sm nav-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`,
+  expand: `<svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>`,
   messageQuestion: `<svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`,
   creditCard: `<svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>`,
   coins: `<svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"></circle><path d="M18.09 10.37A6 6 0 1 1 10.34 18"></path><path d="M7 6h1v4"></path></svg>`,
@@ -200,7 +201,7 @@ const SPONSORS = [
     name: "قسم هندسة تقنيات الحاسوب",
     role: "الجهة الأكاديمية والمنظمة • كلية الطف الجامعة — كربلاء",
     badge: "الجهة المنظمة",
-    tint: "#d4af37",
+    tint: "#8ea3bf",
     accentBadge: true,
     url: "https://www.altuff.edu.iq/departments/6",
     blurb: "تخصص هندسي يجمع الحاسوب والإلكترونيات والاتصالات. نظام بولونيا منذ 2023، قسم توأم مع التقنية الكهربائية في بغداد، وعشر دفعات متخرجة.",
@@ -215,7 +216,7 @@ const SPONSORS = [
     name: "LXD Co.",
     role: "الشريك البرمجي والذكاء الاصطناعي",
     badge: "AI & Software",
-    tint: "#c17a34",
+    tint: "#5b8fd6",
     accentBadge: true,
     url: "https://lxds.org",
     blurb: "شركة عراقية متخصصة في حلول البرمجيات وبنية الذكاء الاصطناعي والحوسبة السحابية المتقدمة.",
@@ -227,7 +228,7 @@ const SPONSORS = [
     name: "LXD Host",
     role: "شريك الاستضافة والخدمات السحابية",
     badge: "استضافة وسحابة",
-    tint: "#2e7d6b",
+    tint: "#2f7f6d",
     accentBadge: false,
     url: "https://host.lxds.org",
     blurb: "استضافة سريعة للمواقع وبوتات تيليجرام ونماذج الذكاء وحاويات Docker — مع SSL مجاني وبنية موزعة عالمياً.",
@@ -398,6 +399,28 @@ function faqChatWidgetTemplate() {
   `;
 }
 
+function galleryLightboxTemplate() {
+  return `
+    <div class="glb" id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="عارض الصور" hidden>
+      <div class="glb-backdrop" data-glb-close></div>
+      <div class="glb-frame">
+        <button type="button" class="glb-btn glb-close" id="glb-close" data-glb-close aria-label="إغلاق العارض">${ICONS.close}</button>
+        <button type="button" class="glb-btn glb-prev" id="glb-prev" aria-label="الصورة السابقة">${ICONS.arrowRightSm}</button>
+        <figure class="glb-figure">
+          <img class="glb-img" id="glb-img" src="" alt="" />
+          <figcaption class="glb-caption">
+            <span class="glb-tag badge badge-accent" id="glb-tag"></span>
+            <h3 class="glb-title" id="glb-title"></h3>
+            <p class="glb-desc" id="glb-desc"></p>
+            <span class="glb-counter" id="glb-counter" aria-live="polite"></span>
+          </figcaption>
+        </figure>
+        <button type="button" class="glb-btn glb-next" id="glb-next" aria-label="الصورة التالية">${ICONS.arrowLeftSm}</button>
+      </div>
+    </div>
+  `;
+}
+
 // ─── View Rendering ───
 function renderApp() {
   app.innerHTML = `
@@ -487,13 +510,13 @@ function renderApp() {
           <div class="footer-col footer-col-links">
             <h4 class="footer-heading">تصفح الموقع</h4>
             <ul class="footer-link-list">
-              <li><a href="#home" class="footer-nav-btn" data-nav="home">الرئيسية</a></li>
-              <li><a href="#about" class="footer-nav-btn" data-scroll="about">الفكرة والرؤية</a></li>
-              <li><a href="#tracks" class="footer-nav-btn" data-scroll="tracks">المسارات الخمسة</a></li>
-              <li><a href="#gallery" class="footer-nav-btn" data-scroll="gallery">معرض الصور</a></li>
-              <li><a href="#schedule" class="footer-nav-btn" data-scroll="schedule">البرنامج</a></li>
-              <li><a href="#sponsors" class="footer-nav-btn" data-scroll="sponsors">الرعاة</a></li>
-              <li><a href="#faq" class="footer-nav-btn" data-scroll="faq">الأسئلة الشائعة</a></li>
+              <li><a href="#home" data-nav="home">الرئيسية</a></li>
+              <li><a href="#about" data-scroll="about">الفكرة والرؤية</a></li>
+              <li><a href="#tracks" data-scroll="tracks">المسارات الخمسة</a></li>
+              <li><a href="#gallery" data-scroll="gallery">معرض الصور</a></li>
+              <li><a href="#schedule" data-scroll="schedule">البرنامج</a></li>
+              <li><a href="#sponsors" data-scroll="sponsors">الرعاة</a></li>
+              <li><a href="#faq" data-scroll="faq">الأسئلة الشائعة</a></li>
             </ul>
           </div>
           <!-- Column 3: Action & Contact -->
@@ -517,6 +540,9 @@ function renderApp() {
 
     <!-- ─── Floating FAQ Chat Bubble Widget ─── -->
     ${faqChatWidgetTemplate()}
+
+    <!-- ─── Gallery Lightbox ─── -->
+    ${galleryLightboxTemplate()}
   `;
   attachGlobalEvents();
   initGlobalMotion();
@@ -881,17 +907,20 @@ function homeViewTemplate() {
             <p class="lead">لقطات تعكس بهجة التخرج، تميز مشاريع الدفعة، وأجواء الفخر الجامعي في كلية الطف الجامعة.</p>
           </div>
 
-          <div class="gallery-grid reveal-on-scroll">
-            ${GALLERY_PHOTOS.map(p => `
-              <div class="gallery-card ${p.colSpan === 2 ? "gallery-col-2" : ""}">
-                <div class="gallery-img-wrapper">
-                  <img src="${p.src}" width="${p.width}" height="${p.height}" alt="${p.title}" class="gallery-img" loading="lazy" decoding="async" sizes="(max-width: 768px) 100vw, (max-width: 992px) 50vw, calc(100% - 32px)" style="max-width:100%; height:auto;" />
-                  <div class="gallery-overlay">
-                    <span class="badge badge-accent" style="margin-bottom: 6px; width: fit-content;">${p.tag}</span>
-                    <h4 class="gallery-card-title">${p.title}</h4>
-                    <p class="gallery-card-desc">${p.desc}</p>
-                  </div>
-                </div>
+          <div class="gallery-grid">
+            ${GALLERY_PHOTOS.map((p, i) => `
+              <div class="gallery-cell gal-reveal" style="--d:${i * 80}ms">
+                <button type="button" class="gallery-card ${p.colSpan === 2 ? "gallery-col-2" : ""}" data-gallery-index="${i}" aria-label="تكبير الصورة: ${p.title}">
+                  <span class="gallery-img-wrapper">
+                    <img src="${p.src}" width="${p.width}" height="${p.height}" alt="${p.title}" class="gallery-img" loading="lazy" decoding="async" sizes="(max-width: 768px) 100vw, (max-width: 992px) 50vw, calc(100% - 32px)" style="max-width:100%; height:auto;" />
+                    <span class="gallery-overlay">
+                      <span class="badge badge-accent gallery-tag">${p.tag}</span>
+                      <span class="gallery-card-title">${p.title}</span>
+                      <span class="gallery-card-desc">${p.desc}</span>
+                      <span class="gallery-zoom-hint" aria-hidden="true">${ICONS.expand}</span>
+                    </span>
+                  </span>
+                </button>
               </div>
             `).join("")}
           </div>
@@ -2170,7 +2199,7 @@ function fireConfetti() {
   if (!confettiCtx || !confettiCanvasEl) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const colors = ["#c17a34", "#2e7d6b", "#d4af37", "#191e25", "#ffffff", "#e8c874", "#a8672a"];
+  const colors = ["#5b8fd6", "#7aa6e2", "#9fb3cc", "#16305c", "#ffffff", "#c2ccdb", "#3aa88a"];
   confettiParticles = [];
 
   for (let i = 0; i < 140; i++) {
@@ -2223,6 +2252,8 @@ function animateConfetti() {
 }
 
 function initHomeMotion() {
+  initGalleryLightbox();
+  initGalleryStagger();
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.querySelectorAll(".reveal-on-scroll").forEach((el) => el.classList.add("visible"));
     return;
@@ -2230,6 +2261,116 @@ function initHomeMotion() {
   initStarCanvas();
   initScrollReveal();
   initTiltCards();
+}
+
+// ─── Gallery: per-card reveal stagger ───
+let galRevealObserver = null;
+function initGalleryStagger() {
+  const cells = document.querySelectorAll(".gal-reveal");
+  if (!cells.length) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    cells.forEach((el) => el.classList.add("gal-in"));
+    return;
+  }
+  if (galRevealObserver) galRevealObserver.disconnect();
+  galRevealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("gal-in");
+      galRevealObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+  cells.forEach((el) => galRevealObserver.observe(el));
+}
+
+// ─── Gallery lightbox: open, arrows, Esc, focus trap ───
+let glbIndex = 0;
+let glbLastFocus = null;
+let glbBound = false;
+
+function renderGalleryLightbox() {
+  const p = GALLERY_PHOTOS[glbIndex];
+  if (!p) return;
+  const img = document.getElementById("glb-img");
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  if (img) {
+    img.src = p.src;
+    img.alt = p.title;
+    img.setAttribute("width", p.width);
+    img.setAttribute("height", p.height);
+  }
+  set("glb-tag", p.tag);
+  set("glb-title", p.title);
+  set("glb-desc", p.desc);
+  set("glb-counter", `${glbIndex + 1} / ${GALLERY_PHOTOS.length}`);
+  const multi = GALLERY_PHOTOS.length > 1;
+  ["glb-prev", "glb-next"].forEach((id) => {
+    const b = document.getElementById(id);
+    if (b) b.hidden = !multi;
+  });
+}
+
+function openGalleryLightbox(index) {
+  const box = document.getElementById("gallery-lightbox");
+  if (!box) return;
+  glbIndex = (index + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length;
+  glbLastFocus = document.activeElement;
+  renderGalleryLightbox();
+  box.hidden = false;
+  // next frame so the open transition actually runs
+  requestAnimationFrame(() => box.classList.add("open"));
+  document.body.style.overflow = "hidden";
+  document.getElementById("glb-close")?.focus();
+}
+
+function closeGalleryLightbox() {
+  const box = document.getElementById("gallery-lightbox");
+  if (!box || box.hidden) return;
+  box.classList.remove("open");
+  document.body.style.overflow = "";
+  const done = () => { if (!box.classList.contains("open")) box.hidden = true; };
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) box.hidden = true;
+  else setTimeout(done, 220);
+  if (glbLastFocus && glbLastFocus.isConnected) glbLastFocus.focus();
+}
+
+function stepGalleryLightbox(dir) {
+  glbIndex = (glbIndex + dir + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length;
+  renderGalleryLightbox();
+}
+
+function initGalleryLightbox() {
+  const box = document.getElementById("gallery-lightbox");
+  if (!box) return;
+
+  document.querySelectorAll("[data-gallery-index]").forEach((btn) => {
+    btn.addEventListener("click", () => openGalleryLightbox(Number(btn.dataset.galleryIndex)));
+  });
+
+  if (glbBound) return;
+  glbBound = true;
+
+  box.addEventListener("click", (e) => {
+    if (e.target.closest("[data-glb-close]")) closeGalleryLightbox();
+    else if (e.target.closest("#glb-prev")) stepGalleryLightbox(-1);
+    else if (e.target.closest("#glb-next")) stepGalleryLightbox(1);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (box.hidden) return;
+    // RTL: ArrowRight moves to the previous photo, ArrowLeft to the next
+    if (e.key === "Escape") closeGalleryLightbox();
+    else if (e.key === "ArrowRight") { e.preventDefault(); stepGalleryLightbox(-1); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); stepGalleryLightbox(1); }
+    else if (e.key === "Tab") {
+      const focusable = box.querySelectorAll("button:not([hidden])");
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
 }
 
 function initStarCanvas() {
@@ -2268,7 +2409,7 @@ function initStarCanvas() {
   function drawStars() {
     ctx.clearRect(0, 0, starCanvas.width, starCanvas.height);
     const dark = document.documentElement.dataset.theme === "dark";
-    ctx.fillStyle = dark ? "#e8c874" : "#c17a34";
+    ctx.fillStyle = dark ? "#9fb3cc" : "#c17a34";
     stars.forEach((s) => {
       ctx.globalAlpha = s.alpha;
       ctx.beginPath();
