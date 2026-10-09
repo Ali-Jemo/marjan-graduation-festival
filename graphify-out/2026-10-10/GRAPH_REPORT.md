@@ -1,7 +1,7 @@
 # Graph Report - marjan-graduation-festival-main  (2026-10-10)
 
 ## Corpus Check
-- 2 files · ~159,656 words
+- 2 files · ~159,766 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary

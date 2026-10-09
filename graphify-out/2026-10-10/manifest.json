@@ -5,13 +5,13 @@
     "semantic_hash": ""
   },
   "src/main.js": {
-    "mtime": 1791589033.367477,
-    "ast_hash": "614cbb6e9ba224826b178d91d20ff14b",
+    "mtime": 1791587677.1807683,
+    "ast_hash": "0619217f1da2b4f14c5ed4c0b82267db",
     "semantic_hash": ""
   },
   "index.html": {
-    "mtime": 1791589033.3666894,
-    "ast_hash": "38403a00ed41fc8a95fb47ee0d5b0406",
+    "mtime": 1791587400.6491997,
+    "ast_hash": "e5e50d6eccf81807e87742242fa42190",
     "semantic_hash": ""
   },
   "public/\u0642\u0648\u0627\u0639\u062f-\u062d\u0641\u0644-\u0627\u0644\u062a\u062e\u0631\u062c.html": {
@@ -25,8 +25,8 @@
     "semantic_hash": ""
   },
   "public/favicon.svg": {
-    "mtime": 1791589033.373673,
-    "ast_hash": "3cf89ea2afb93849138d236412af3663",
+    "mtime": 1791576268.0243704,
+    "ast_hash": "80d1c55bc8279c2ee3239482fd3204ea",
     "semantic_hash": ""
   },
   "public/images/footer-bg.jpg": {
@@ -35,27 +35,27 @@
     "semantic_hash": ""
   },
   "public/images/gallery-moment-1.jpg": {
-    "mtime": 1791589033.3765733,
+    "mtime": 1791063752.0,
     "ast_hash": "a46b6f28dd38ae9c51a64e071bf0aba8",
     "semantic_hash": ""
   },
   "public/images/gallery-moment-2.jpg": {
-    "mtime": 1791589033.377028,
+    "mtime": 1791063752.0,
     "ast_hash": "94efb1f264a8e9ff96601eb47f326669",
     "semantic_hash": ""
   },
   "public/images/gallery-moment-3.jpg": {
-    "mtime": 1791589033.3773334,
+    "mtime": 1791063752.0,
     "ast_hash": "b978b0556dd0da4514d04adb2d189568",
     "semantic_hash": ""
   },
   "public/images/hero-art.jpg": {
-    "mtime": 1791589033.3776667,
+    "mtime": 1791063752.0,
     "ast_hash": "10e2d437f62245c04a28032775728b25",
     "semantic_hash": ""
   },
   "public/images/hero-graduation-main.jpg": {
-    "mtime": 1791589033.378073,
+    "mtime": 1791063752.0,
     "ast_hash": "8e94ddd857c851cdad1266704dcfbfe1",
     "semantic_hash": ""
   },
@@ -65,32 +65,32 @@
     "semantic_hash": ""
   },
   "public/images/sponsors/altuff-dept.png": {
-    "mtime": 1791589033.3821945,
+    "mtime": 1791063752.0,
     "ast_hash": "71a17b77641cbf081b90a1cc66958c89",
     "semantic_hash": ""
   },
   "public/images/sponsors/altuff-logo.svg": {
-    "mtime": 1791589033.381581,
+    "mtime": 1791063752.0,
     "ast_hash": "f13860f8f1d963bbada76a7764f949d6",
     "semantic_hash": ""
   },
   "public/images/sponsors/jemo-cover.jpg": {
-    "mtime": 1791589033.3813345,
+    "mtime": 1791063752.0,
     "ast_hash": "34d619c211368587485011caf6844709",
     "semantic_hash": ""
   },
   "public/images/sponsors/jemolabs-logo.png": {
-    "mtime": 1791589033.381062,
+    "mtime": 1791063752.0,
     "ast_hash": "410c0ff57ae2355cff29936193e6cc11",
     "semantic_hash": ""
   },
   "public/images/sponsors/lxd-api.png": {
-    "mtime": 1791589033.380327,
+    "mtime": 1791063752.0,
     "ast_hash": "72e071112a4e868508eb99868c7a54a2",
     "semantic_hash": ""
   },
   "public/images/sponsors/lxd-host.png": {
-    "mtime": 1791589033.3794522,
+    "mtime": 1791063752.0,
     "ast_hash": "f6d5984bd74085505c79f924be0e1e33",
     "semantic_hash": ""
   },
@@ -100,43 +100,43 @@
     "semantic_hash": ""
   },
   "public/images/sponsors/lxd-mesh.jpg": {
-    "mtime": 1791589033.3787873,
+    "mtime": 1791063752.0,
     "ast_hash": "7c3bb9e27b0ab7434b02d1af4d6384c2",
     "semantic_hash": ""
   },
   "public/images/track-bazar.jpg": {
-    "mtime": 1791589033.3825028,
+    "mtime": 1791063752.0,
     "ast_hash": "eda6b99c2ebcce29379f3ce91d27cd1d",
     "semantic_hash": ""
   },
   "public/images/track-ceremony.jpg": {
-    "mtime": 1791589033.3827689,
+    "mtime": 1791063752.0,
     "ast_hash": "6e03d05bc00b416cbb324e5a114bf74e",
     "semantic_hash": ""
   },
   "public/images/track-media.jpg": {
-    "mtime": 1791589033.3830328,
+    "mtime": 1791063752.0,
     "ast_hash": "4df41fde9a5662b371e3258720e7c5d9",
     "semantic_hash": ""
   },
   "public/images/track-projects.jpg": {
-    "mtime": 1791589033.3832712,
+    "mtime": 1791063752.0,
     "ast_hash": "3d360859baced8931b3fdf6abd3e245c",
     "semantic_hash": ""
   },
   "public/images/track-volunteering.jpg": {
-    "mtime": 1791589033.3835084,
+    "mtime": 1791063752.0,
     "ast_hash": "71bb5e8d88e8ce81a1362ba86a199daa",
     "semantic_hash": ""
   },
   "public/images/vision-art.jpg": {
-    "mtime": 1791589033.3837738,
+    "mtime": 1791063752.0,
     "ast_hash": "476da36e8e971b6373d9cbc3ca91a9fc",
     "semantic_hash": ""
   },
   "public/logo.svg": {
-    "mtime": 1791589033.3751948,
-    "ast_hash": "3a1a6c1e4dde763eb3487383cc289005",
+    "mtime": 1791063752.0,
+    "ast_hash": "f8f30ae4c0de55216cabb3f7fa30c15b",
     "semantic_hash": ""
   }
 }

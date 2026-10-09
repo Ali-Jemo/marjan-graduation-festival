@@ -8,5 +8,8 @@
   "6": "initThemeToggle",
   "7": "initGlobalMotion",
   "8": "formatArg",
-  "9": "fireConfetti"
+  "9": "fireConfetti",
+  "10": ".open",
+  "11": "homeViewTemplate",
+  "12": "homeViewTemplate"
 }
