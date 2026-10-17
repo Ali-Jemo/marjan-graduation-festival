@@ -4100,10 +4100,10 @@ body { transition: background-color .35s ease; }
 }
 .sponsor-logo-tile svg,
 .sponsor-logo-tile img {
-  width: 30px;
-  height: 30px;
-  object-fit: cover;
-  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 6px;
   display: block;
 }
 .sponsor-card h4 { font-size: var(--text-base); color: var(--fg); margin: 0; }
@@ -4658,7 +4658,7 @@ section.section-py { counter-increment: fest-sec; }
 .min-logo-icon img {
   width: 23px;
   height: 23px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 5px;
   display: block;
 }
