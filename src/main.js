@@ -70,10 +70,10 @@ const TRACKS = {
     image: "./public/images/track-projects.jpg",
     width: 800,
     height: 533,
-    subtitle: "جناح مجهز لعرض فكرة ومشروع التخرج",
-    desc: "مساحة مخصصة لعرض مشاريع التخرج والأفكار الواعدة أمام المجتمع الأكاديمي والضيوف والرعاة.",
-    tip: "مخصص للطلبة وفرق المشاريع لعرض ابتكاراتهم في المعرض التقني. يُفضَّل إرفاق ملف ملخص أو عرض توضيحي في الأسفل.",
-    defaultField: "الذكاء الاصطناعي وإنترنت الأشياء",
+    subtitle: "جناح مجهز لعرض فكرة ومشروع التخرج ومشاريع الشركات الراعية",
+    desc: "مساحة مخصصة لعرض مشاريع التخرج والأفكار الواعدة أمام المجتمع الأكاديمي والضيوف والرعاة، وتتضمن الفقرة عروض مشاريع تقنية وتطبيقية تعرضها الشركات المشاركة: LXD Co. (lxds.org)، حيّز (heeiz.com)، وكربلاء للأبنية الذكية (knxkarbala.com).",
+    tip: "مخصص للطلبة وفرق المشاريع لعرض ابتكاراتهم إلى جانب مشاريع الشركات المشاركة (lxds.org، heeiz.com، knxkarbala.com). يُفضَّل إرفاق ملف ملخص أو عرض توضيحي في الأسفل.",
+    defaultField: "الذكاء الاصطناعي وإنترنت الأشياء والأنظمة الذكية",
   },
   bazaar: {
     id: "bazaar",
@@ -226,13 +226,35 @@ const SPONSORS = [
     name: "LXD Co.",
     role: "الشريك البرمجي والذكاء الاصطناعي",
     badge: "AI & Software",
-    tint: "#5b8fd6",
+    tint: "#3d6337",
     accentBadge: true,
     url: "https://lxds.org",
-    blurb: "شركة عراقية متخصصة في حلول البرمجيات وبنية الذكاء الاصطناعي والحوسبة السحابية المتقدمة.",
+    blurb: "شركة عراقية متخصصة في حلول البرمجيات وبنية الذكاء الاصطناعي والحوسبة السحابية المتقدمة، تعرض مشاريعها البرمجية ضمن معرض المشاريع.",
     chips: ["API Service", "AI Solutions", "Cloud"],
     cover: "./public/images/sponsors/lxd-api.png",
     logo: `<svg class="sponsor-logo-svg" viewBox="0 0 100 100" fill="none"><path d="M20 30L80 20L80 40L20 50Z" fill="currentColor"/><path d="M20 55L80 45L80 65L20 75Z" fill="currentColor" opacity="0.65"/><path d="M20 80L80 70L80 85L20 95Z" fill="currentColor" opacity="0.35"/></svg>`,
+  },
+  {
+    name: "حيّز — Heeiz",
+    role: "شريك التجارة الإلكترونية وسلاسل الإمداد",
+    badge: "Fulfillment & Logistics",
+    tint: "#2e7d6b",
+    accentBadge: true,
+    url: "https://heeiz.com",
+    blurb: "المنصة العراقية الأولى في خدمات Fulfillment والتخزين الذكي وتكنولوجيا سلاسل الإمداد والتوصيل، تعرض أحدث أنظمتها اللوجستية في فقرة المشاريع.",
+    chips: ["Fulfillment", "تخزين ذكي", "سلاسل إمداد"],
+    logo: `<svg class="sponsor-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>`,
+  },
+  {
+    name: "كربلاء للأبنية الذكية — KNX",
+    role: "شريك الأتمتة والأنظمة الذكية وإنترنت الأشياء",
+    badge: "Smart Automation & IoT",
+    tint: "#3d6337",
+    accentBadge: true,
+    url: "https://knxkarbala.com",
+    blurb: "جهة متخصصة في تنفيذ وتصميم حلول المنازل والأبنية الذكية والأتمتة وأنظمة إنترنت الأشياء والتحكم الصناعي، تشارك بعروض مشاريع تطبيقية ذكية.",
+    chips: ["KNX Systems", "Smart Buildings", "IoT & Automation"],
+    logo: `<svg class="sponsor-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline><circle cx="12" cy="7" r="1.5" fill="currentColor"></circle></svg>`,
   },
   {
     name: "LXD Host",
@@ -1027,7 +1049,7 @@ function homeViewTemplate() {
               </div>
               <div>
                 <div class="timeline-content-title">معرض المشاريع والبازار الطلابي والضيافة</div>
-                <div class="timeline-content-desc">استكمال بقية فعاليات الحفل: أجنحة مشاريع التخرج الابتكارية، البازار الطلابي، رؤية مشاريع الطلبة، وركن الضيافة.</div>
+                <div class="timeline-content-desc">استكمال بقية فعاليات الحفل: أجنحة مشاريع التخرج الابتكارية، وعروض حية لمشاريع الشركات المشاركة (LXD Co.، حيّز Heeiz، وكربلاء للأبنية الذكية KNX)، إضافة إلى البازار الطلابي وركن الضيافة.</div>
               </div>
             </div>
           </div>
