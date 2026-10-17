@@ -126,7 +126,7 @@ const GALLERY_PHOTOS = [
     src: "./public/images/hero-graduation-main.jpg",
     title: "مسيرة التخرج الرسمية وتتويج الدفعة",
     tag: "مراسم التكريم",
-    desc: "أجواء التكريم الرسمي وتسليم الدروع التذكارية في مجمع الكليات الهندسية.",
+    desc: "أجواء التكريم الرسمي وتسليم الدروع التذكارية في حدائق كلية الطف الجامعة.",
     colSpan: 2,
     width: 1400,
     height: 933,
@@ -161,6 +161,16 @@ const GALLERY_PHOTOS = [
     width: 800,
     height: 533,
   },
+  {
+    id: "photo-5",
+    src: "./public/images/dean-portrait.jpg",
+    title: "كلمة العميد وأساتذة الأقسام",
+    tag: "كلمة العميد",
+    desc: "كلمة ترحيب من العميد تليها كلمة رئيس القسم، قبل توزيع الشهادات على دفعة 2026.",
+    colSpan: 2,
+    width: 1200,
+    height: 734,
+  },
 ];
 
 // ─── FAQ List ───
@@ -179,7 +189,7 @@ const FAQS = [
   },
   {
     q: "هل يمكن دعوة الأهل والأصدقاء للحفل؟",
-    a: "نعم بالتأكيد! القاعات ومسرح التكريم في مجمع الكليات الهندسية مجهزة بالكامل لاستقبال عائلات الطلبة ومشاركتهم بهجة التخرج والتقاط الصور التذكارية.",
+    a: "نعم بالتأكيد! القاعات ومسرح التكريم في حدائق كلية الطف الجامعة مجهزة بالكامل لاستقبال عائلات الطلبة ومشاركتهم بهجة التخرج والتقاط الصور التذكارية.",
   },
   {
     q: "هل يلزم رفع ملف داعم مع استمارة الطلب؟",
@@ -600,7 +610,7 @@ function homeViewTemplate() {
                   <span class="event-detail-icon">${ICONS.mapPin}</span>
                   <div class="event-detail-text">
                     <span class="event-detail-label">موقع الاحتفال</span>
-                    <span class="event-detail-val">مجمع الكليات الهندسية — كربلاء</span>
+                    <span class="event-detail-val">حدائق كلية الطف الجامعة — كربلاء</span>
                   </div>
                 </div>
               </div>
@@ -934,6 +944,7 @@ function homeViewTemplate() {
             <div class="eyebrow">الجدول الزمني</div>
             <h2 class="section-title">برنامج اليوم الاحتفالي</h2>
             <p class="lead">فقرات مدروسة تضمن انسيابية الحركة وتكريم جميع الطلبة بأعلى المعايير التنظيمية.</p>
+            <p class="lead" style="margin-top: calc(var(--space-3) * -1); font-size: var(--text-sm);">تبدأ الفقرات بتلاوة القرآن الكريم، ثم فقرة المواليد وكلمة العميد، وبعدها التصوير المفرد وتسليم الشهادات مع أساتذة كل قسم، ثم الصورة الجماعية، وأخيراً استكمال الحفل بالفعاليات الداخلية.</p>
           </div>
 
           <div class="schedule-filter-bar reveal-on-scroll">
@@ -957,11 +968,33 @@ function homeViewTemplate() {
             <div class="timeline-item" data-period="morning">
               <div class="timeline-time-badge">
                 ${ICONS.clock}
-                <span>10:30 ص</span>
+                <span>11:00 ص</span>
               </div>
               <div>
-                <div class="timeline-content-title">المسيرة ومراسم التكريم الرسمية</div>
-                <div class="timeline-content-desc">مسيرة التخرج الرسمية، الكلمات الافتتاحية لعمادة الكلية ورئاسة القسم، وتسليم الدروع التذكارية على المنصة.</div>
+                <div class="timeline-content-title">تلاوة قرآنية وافتتاح الحفل</div>
+                <div class="timeline-content-desc">تلاوة عطرة من الذكر الحكيم تفتتح فقرات اليوم الاحتفالي.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item" data-period="morning">
+              <div class="timeline-time-badge">
+                ${ICONS.clock}
+                <span>11:30 ص</span>
+              </div>
+              <div>
+                <div class="timeline-content-title">فقرات المواليد ونشيد المهرجان</div>
+                <div class="timeline-content-desc">فقرة خاصة لأطفال الدفعة (المواليد) تضفي بهجة الحفل، يتبعها النشيد الرسمي للمهرجان.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item" data-period="morning">
+              <div class="timeline-time-badge">
+                ${ICONS.clock}
+                <span>12:00 م</span>
+              </div>
+              <div>
+                <div class="timeline-content-title">كلمة عميد الكلية وضيوف الشرف</div>
+                <div class="timeline-content-desc">كلمة يلقيها العميد أو من ينيبه من الشرف، تتوج بكلمة رئيس القسم والتهاني للدفعة الجديدة.</div>
               </div>
             </div>
 
@@ -971,19 +1004,30 @@ function homeViewTemplate() {
                 <span>12:30 م</span>
               </div>
               <div>
-                <div class="timeline-content-title">معرض المشاريع والبازار الطلابي والضيافة</div>
-                <div class="timeline-content-desc">افتتاح أجنحة مشاريع التخرج الابتكارية، عروض الشركات التقنية الراعية، وركن الضيافة والبازار.</div>
+                <div class="timeline-content-title">بدء التصوير الفردي وتسليم الشهادات</div>
+                <div class="timeline-content-desc">البدء بأخذ الصور المفردة وتسليم الشهادة إلى كل طالب برفعة أستاذه من كل قسم.</div>
               </div>
             </div>
 
             <div class="timeline-item" data-period="afternoon">
               <div class="timeline-time-badge">
                 ${ICONS.clock}
-                <span>02:00 م</span>
+                <span>01:00 م</span>
               </div>
               <div>
-                <div class="timeline-content-title">جلسات التصوير والاحتفاء والتقاط الصورة الجماعية</div>
-                <div class="timeline-content-desc">جلسات التصوير التذكارية مع الأساتذة والعائلات والتقاط الصورة التذكارية الكبرى لدفعة 2026.</div>
+                <div class="timeline-content-title">الصورة الجماعية لدفعة 2026</div>
+                <div class="timeline-content-desc">صورة جماعية للطلاب مع العميد والأساتذة في لقطة ختامية تجمع دفعة 2026.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item" data-period="afternoon">
+              <div class="timeline-time-badge">
+                ${ICONS.clock}
+                <span>01:30 م</span>
+              </div>
+              <div>
+                <div class="timeline-content-title">معرض المشاريع والبازار الطلابي والضيافة</div>
+                <div class="timeline-content-desc">استكمال بقية فعاليات الحفل: أجنحة مشاريع التخرج الابتكارية، البازار الطلابي، رؤية مشاريع الطلبة، وركن الضيافة.</div>
               </div>
             </div>
           </div>
@@ -1091,7 +1135,7 @@ const BOT_FAQS = [
     q: "وين مكان الحفل؟",
     category: "الموقع والقاعات",
     icon: ICONS.mapPin,
-    a: "تقام فعاليات المهرجان في القاعة المركزية والساحة الطلابية في كلية الطف الجامعة — كربلاء المقدسة.",
+    a: "تقام فعاليات المهرجان في حدائق كلية الطف الجامعة — كربلاء المقدسة.",
     actionText: "خريطة الموقع عبر البوت",
     actionParam: "location"
   },
@@ -1496,24 +1540,16 @@ function scrollToSection(sectionId) {
 
 // ─── Global Event Listeners ───
 function getPreferredTheme() {
-  try {
-    const saved = localStorage.getItem("mgf-theme");
-    if (saved === "dark" || saved === "light") return saved;
-  } catch {}
-  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return "light";
 }
 function applyTheme(theme) {
-  document.documentElement.dataset.theme = theme;
-  try { localStorage.setItem("mgf-theme", theme); } catch {}
-  const btn = document.getElementById("theme-toggle-btn");
-  if (btn) btn.innerHTML = theme === "dark" ? ICONS.sun : ICONS.moon;
+  document.documentElement.dataset.theme = "light";
+  try { localStorage.removeItem("mgf-theme"); } catch {}
 }
 function initThemeToggle() {
-  applyTheme(getPreferredTheme());
-  document.getElementById("theme-toggle-btn")?.addEventListener("click", () => {
-    const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    applyTheme(next);
-  });
+  applyTheme("light");
+  const btn = document.getElementById("theme-toggle-btn");
+  if (btn) btn.style.display = "none";
 }
 // ─── NVIDIA-style header: scroll shadow, mega dropdown, hamburger drawer ───
 function initNvHeader() {
