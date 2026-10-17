@@ -228,6 +228,7 @@ const SPONSORS = [
     badge: "AI & Software",
     tint: "#3d6337",
     accentBadge: true,
+    isProjectExhibitor: true,
     url: "https://lxds.org",
     blurb: "شركة عراقية متخصصة في حلول البرمجيات وبنية الذكاء الاصطناعي والحوسبة السحابية المتقدمة، تعرض مشاريعها البرمجية ضمن معرض المشاريع.",
     chips: ["API Service", "AI Solutions", "Cloud"],
@@ -240,6 +241,7 @@ const SPONSORS = [
     badge: "Fulfillment & Logistics",
     tint: "#2e7d6b",
     accentBadge: true,
+    isProjectExhibitor: true,
     url: "https://heeiz.com",
     blurb: "المنصة العراقية الأولى في خدمات Fulfillment والتخزين الذكي وتكنولوجيا سلاسل الإمداد والتوصيل، تعرض أحدث أنظمتها اللوجستية في فقرة المشاريع.",
     chips: ["Fulfillment", "تخزين ذكي", "سلاسل إمداد"],
@@ -252,6 +254,7 @@ const SPONSORS = [
     badge: "Smart Automation & IoT",
     tint: "#3d6337",
     accentBadge: true,
+    isProjectExhibitor: true,
     url: "https://knxkarbala.com",
     blurb: "جهة متخصصة في تنفيذ وتصميم حلول المنازل والأبنية الذكية والأتمتة وأنظمة إنترنت الأشياء والتحكم الصناعي، تشارك بعروض مشاريع تطبيقية ذكية.",
     chips: ["KNX Systems", "Smart Buildings", "IoT & Automation"],
@@ -879,6 +882,45 @@ function homeViewTemplate() {
 
                     <p id="track-interactive-desc" class="box-text"></p>
 
+                    <!-- Featured Project Exhibitor Companies (Visible on Track 02) -->
+                    <div id="track-project-companies-list" class="track-companies-container" style="display: none;">
+                      <div class="track-companies-head">
+                        <span class="badge badge-accent"><span class="badge-dot"></span>الشركات المشاركة بعروض المشاريع</span>
+                      </div>
+                      <div class="track-companies-grid">
+                        <a href="https://lxds.org" target="_blank" rel="noopener" class="track-company-pill" aria-label="LXD Co.">
+                          <span class="track-company-pill-logo">
+                            <svg viewBox="0 0 100 100" fill="none"><path d="M20 30L80 20L80 40L20 50Z" fill="currentColor"/><path d="M20 55L80 45L80 65L20 75Z" fill="currentColor" opacity="0.65"/><path d="M20 80L80 70L80 85L20 95Z" fill="currentColor" opacity="0.35"/></svg>
+                          </span>
+                          <span class="track-company-pill-info">
+                            <span class="track-company-pill-name">LXD Co.</span>
+                            <span class="track-company-pill-role">أنظمة الذكاء والحلول البرمجية</span>
+                          </span>
+                          <span class="track-company-pill-ext" aria-hidden="true">${ICONS.external}</span>
+                        </a>
+                        <a href="https://heeiz.com" target="_blank" rel="noopener" class="track-company-pill" aria-label="حيّز Heeiz">
+                          <span class="track-company-pill-logo">
+                            <img src="./public/images/sponsors/heeiz-logo.png" alt="Heeiz" />
+                          </span>
+                          <span class="track-company-pill-info">
+                            <span class="track-company-pill-name">حيّز — Heeiz</span>
+                            <span class="track-company-pill-role">منصة Fulfillment والتجارة</span>
+                          </span>
+                          <span class="track-company-pill-ext" aria-hidden="true">${ICONS.external}</span>
+                        </a>
+                        <a href="https://knxkarbala.com" target="_blank" rel="noopener" class="track-company-pill" aria-label="كربلاء للأبنية الذكية KNX">
+                          <span class="track-company-pill-logo">
+                            <img src="./public/images/sponsors/knx-logo.png" alt="KNX Karbala" />
+                          </span>
+                          <span class="track-company-pill-info">
+                            <span class="track-company-pill-name">كربلاء للأبنية الذكية</span>
+                            <span class="track-company-pill-role">الأتمتة وأنظمة إنترنت الأشياء</span>
+                          </span>
+                          <span class="track-company-pill-ext" aria-hidden="true">${ICONS.external}</span>
+                        </a>
+                      </div>
+                    </div>
+
                     <div class="track-interactive-tip-box" id="track-interactive-tip-box">
                       <strong>إرشادات المسار: </strong><span id="track-interactive-tip"></span>
                     </div>
@@ -1101,18 +1143,31 @@ function homeViewTemplate() {
           <!-- Partners grid (Mistral product-card style) -->
           <div class="sponsors-grid">
             ${SPONSORS.slice(1).map((s, i) => `
-              <div class="sponsor-card sp-reveal" style="--d:${(i + 1) * 90}ms">
-                ${s.cover ? `<div class="sponsor-visual"><img src="${s.cover}" alt="" loading="lazy" decoding="async" /></div>` : ""}
+              <div class="sponsor-card sp-reveal ${s.isProjectExhibitor ? "is-project-exhibitor" : ""}" style="--d:${(i + 1) * 90}ms">
+                ${s.cover ? `
+                  <div class="sponsor-visual">
+                    <img src="${s.cover}" alt="${s.name}" loading="lazy" decoding="async" />
+                    ${s.isProjectExhibitor ? `<span class="sponsor-project-badge"><span class="badge-dot"></span>مشارك بفقرة المشاريع</span>` : ""}
+                  </div>
+                ` : ""}
                 <div class="sponsor-card-body">
                   <div class="sponsor-card-top">
                     <div class="sponsor-logo-tile" style="--tint:${s.tint}">${s.logo}</div>
-                    <span class="badge ${s.accentBadge ? "badge-accent" : ""}">${s.badge}</span>
+                    <div class="sponsor-badges-stack">
+                      <span class="badge ${s.accentBadge ? "badge-accent" : ""}">${s.badge}</span>
+                      ${s.isProjectExhibitor ? `<span class="sponsor-project-pill">عرض مشاريع</span>` : ""}
+                    </div>
                   </div>
                   <h4><span class="sponsor-index">0${i + 1}</span>${s.name}</h4>
                   <p class="sponsor-card-role">${s.role}</p>
                   <p class="sponsor-card-blurb">${s.blurb}</p>
                   ${s.chips ? `<div class="sponsor-chips">${s.chips.map(c => `<span class="sponsor-chip">${c}</span>`).join("")}</div>` : ""}
-                  ${s.url ? `<a class="sponsor-card-link" href="${s.url}" target="_blank" rel="noopener"><span>زيارة الموقع</span>${ICONS.external}</a>` : ""}
+                  ${s.url ? `
+                    <a class="sponsor-card-link" href="${s.url}" target="_blank" rel="noopener">
+                      <span>زيارة المنصة والمشاريع</span>
+                      ${ICONS.arrowLeftSm}
+                    </a>
+                  ` : ""}
                 </div>
                 <div class="sponsor-spot" aria-hidden="true"></div>
               </div>
@@ -2168,6 +2223,10 @@ function initInteractiveTracks() {
       if (numEl) numEl.textContent = `${data.number} / المسار ${data.number === "01" ? "الأول" : data.number === "02" ? "الثاني" : data.number === "03" ? "الثالث" : data.number === "04" ? "الرابع" : "الخامس"}`;
       if (tagEl) tagEl.textContent = data.tag;
       if (desc) desc.textContent = data.desc;
+      const companiesListEl = document.getElementById("track-project-companies-list");
+      if (companiesListEl) {
+        companiesListEl.style.display = data.id === "project" ? "block" : "none";
+      }
       if (tipEl) tipEl.textContent = data.tip;
       if (btn) btn.dataset.track = data.id;
 
